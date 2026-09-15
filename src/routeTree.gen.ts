@@ -10,9 +10,15 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as CompetitorRouteImport } from './routes/competitor'
 import { Route as JudgeRouteImport } from './routes/judge'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminAssignmentsRouteImport } from './routes/admin.assignments'
+import { Route as AdminCompetitorsRouteImport } from './routes/admin.competitors'
+import { Route as AdminJudgesRouteImport } from './routes/admin.judges'
+import { Route as AdminMonitorRouteImport } from './routes/admin.monitor'
 import { Route as CompetitorIndexRouteImport } from './routes/competitor.index'
 import { Route as CompetitorApplicationRouteImport } from './routes/competitor.application'
 import { Route as CompetitorDocumentsRouteImport } from './routes/competitor.documents'
@@ -32,6 +38,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CompetitorRoute = CompetitorRouteImport.update({
   id: '/competitor',
   path: '/competitor',
@@ -46,6 +57,31 @@ const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAssignmentsRoute = AdminAssignmentsRouteImport.update({
+  id: '/assignments',
+  path: '/assignments',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCompetitorsRoute = AdminCompetitorsRouteImport.update({
+  id: '/competitors',
+  path: '/competitors',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminJudgesRoute = AdminJudgesRouteImport.update({
+  id: '/judges',
+  path: '/judges',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMonitorRoute = AdminMonitorRouteImport.update({
+  id: '/monitor',
+  path: '/monitor',
+  getParentRoute: () => AdminRoute,
 } as any)
 const CompetitorIndexRoute = CompetitorIndexRouteImport.update({
   id: '/',
@@ -115,9 +151,14 @@ const JudgeEvaluateTeamIdRoute = JudgeEvaluateTeamIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/competitor': typeof CompetitorRouteWithChildren
   '/judge': typeof JudgeRouteWithChildren
   '/register': typeof RegisterRoute
+  '/admin/assignments': typeof AdminAssignmentsRoute
+  '/admin/competitors': typeof AdminCompetitorsRoute
+  '/admin/judges': typeof AdminJudgesRoute
+  '/admin/monitor': typeof AdminMonitorRoute
   '/competitor/application': typeof CompetitorApplicationRoute
   '/competitor/documents': typeof CompetitorDocumentsRoute
   '/competitor/profile': typeof CompetitorProfileRoute
@@ -128,6 +169,7 @@ export interface FileRoutesByFullPath {
   '/login/admin': typeof LoginAdminRoute
   '/login/competitor': typeof LoginCompetitorRoute
   '/login/judge': typeof LoginJudgeRoute
+  '/admin/': typeof AdminIndexRoute
   '/competitor/': typeof CompetitorIndexRoute
   '/judge/': typeof JudgeIndexRoute
   '/judge/evaluate/$teamId': typeof JudgeEvaluateTeamIdRoute
@@ -135,6 +177,10 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/register': typeof RegisterRoute
+  '/admin/assignments': typeof AdminAssignmentsRoute
+  '/admin/competitors': typeof AdminCompetitorsRoute
+  '/admin/judges': typeof AdminJudgesRoute
+  '/admin/monitor': typeof AdminMonitorRoute
   '/competitor/application': typeof CompetitorApplicationRoute
   '/competitor/documents': typeof CompetitorDocumentsRoute
   '/competitor/profile': typeof CompetitorProfileRoute
@@ -145,6 +191,7 @@ export interface FileRoutesByTo {
   '/login/admin': typeof LoginAdminRoute
   '/login/competitor': typeof LoginCompetitorRoute
   '/login/judge': typeof LoginJudgeRoute
+  '/admin': typeof AdminIndexRoute
   '/competitor': typeof CompetitorIndexRoute
   '/judge': typeof JudgeIndexRoute
   '/judge/evaluate/$teamId': typeof JudgeEvaluateTeamIdRoute
@@ -152,9 +199,14 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/competitor': typeof CompetitorRouteWithChildren
   '/judge': typeof JudgeRouteWithChildren
   '/register': typeof RegisterRoute
+  '/admin/assignments': typeof AdminAssignmentsRoute
+  '/admin/competitors': typeof AdminCompetitorsRoute
+  '/admin/judges': typeof AdminJudgesRoute
+  '/admin/monitor': typeof AdminMonitorRoute
   '/competitor/application': typeof CompetitorApplicationRoute
   '/competitor/documents': typeof CompetitorDocumentsRoute
   '/competitor/profile': typeof CompetitorProfileRoute
@@ -165,6 +217,7 @@ export interface FileRoutesById {
   '/login/admin': typeof LoginAdminRoute
   '/login/competitor': typeof LoginCompetitorRoute
   '/login/judge': typeof LoginJudgeRoute
+  '/admin/': typeof AdminIndexRoute
   '/competitor/': typeof CompetitorIndexRoute
   '/judge/': typeof JudgeIndexRoute
   '/judge/evaluate/$teamId': typeof JudgeEvaluateTeamIdRoute
@@ -173,9 +226,14 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/competitor'
     | '/judge'
     | '/register'
+    | '/admin/assignments'
+    | '/admin/competitors'
+    | '/admin/judges'
+    | '/admin/monitor'
     | '/competitor/application'
     | '/competitor/documents'
     | '/competitor/profile'
@@ -186,6 +244,7 @@ export interface FileRouteTypes {
     | '/login/admin'
     | '/login/competitor'
     | '/login/judge'
+    | '/admin/'
     | '/competitor/'
     | '/judge/'
     | '/judge/evaluate/$teamId'
@@ -193,6 +252,10 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/register'
+    | '/admin/assignments'
+    | '/admin/competitors'
+    | '/admin/judges'
+    | '/admin/monitor'
     | '/competitor/application'
     | '/competitor/documents'
     | '/competitor/profile'
@@ -203,15 +266,21 @@ export interface FileRouteTypes {
     | '/login/admin'
     | '/login/competitor'
     | '/login/judge'
+    | '/admin'
     | '/competitor'
     | '/judge'
     | '/judge/evaluate/$teamId'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/competitor'
     | '/judge'
     | '/register'
+    | '/admin/assignments'
+    | '/admin/competitors'
+    | '/admin/judges'
+    | '/admin/monitor'
     | '/competitor/application'
     | '/competitor/documents'
     | '/competitor/profile'
@@ -222,6 +291,7 @@ export interface FileRouteTypes {
     | '/login/admin'
     | '/login/competitor'
     | '/login/judge'
+    | '/admin/'
     | '/competitor/'
     | '/judge/'
     | '/judge/evaluate/$teamId'
@@ -229,6 +299,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   CompetitorRoute: typeof CompetitorRouteWithChildren
   JudgeRoute: typeof JudgeRouteWithChildren
   RegisterRoute: typeof RegisterRoute
@@ -244,6 +315,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/competitor': {
@@ -266,6 +344,41 @@ declare module '@tanstack/react-router' {
       fullPath: '/register'
       preLoaderRoute: typeof RegisterRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/assignments': {
+      id: '/admin/assignments'
+      path: '/assignments'
+      fullPath: '/admin/assignments'
+      preLoaderRoute: typeof AdminAssignmentsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/competitors': {
+      id: '/admin/competitors'
+      path: '/competitors'
+      fullPath: '/admin/competitors'
+      preLoaderRoute: typeof AdminCompetitorsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/judges': {
+      id: '/admin/judges'
+      path: '/judges'
+      fullPath: '/admin/judges'
+      preLoaderRoute: typeof AdminJudgesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/monitor': {
+      id: '/admin/monitor'
+      path: '/monitor'
+      fullPath: '/admin/monitor'
+      preLoaderRoute: typeof AdminMonitorRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/competitor/': {
       id: '/competitor/'
@@ -361,6 +474,24 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminRouteChildren {
+  AdminAssignmentsRoute: typeof AdminAssignmentsRoute
+  AdminCompetitorsRoute: typeof AdminCompetitorsRoute
+  AdminJudgesRoute: typeof AdminJudgesRoute
+  AdminMonitorRoute: typeof AdminMonitorRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminAssignmentsRoute: AdminAssignmentsRoute,
+  AdminCompetitorsRoute: AdminCompetitorsRoute,
+  AdminJudgesRoute: AdminJudgesRoute,
+  AdminMonitorRoute: AdminMonitorRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 interface CompetitorRouteChildren {
   CompetitorApplicationRoute: typeof CompetitorApplicationRoute
   CompetitorDocumentsRoute: typeof CompetitorDocumentsRoute
@@ -401,6 +532,7 @@ const JudgeRouteWithChildren = JudgeRoute._addFileChildren(JudgeRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   CompetitorRoute: CompetitorRouteWithChildren,
   JudgeRoute: JudgeRouteWithChildren,
   RegisterRoute: RegisterRoute,
