@@ -20,10 +20,12 @@ import { Route as CompetitorProfileRouteImport } from './routes/competitor.profi
 import { Route as CompetitorUpdatesRouteImport } from './routes/competitor.updates'
 import { Route as JudgeIndexRouteImport } from './routes/judge.index'
 import { Route as JudgeCalibrationRouteImport } from './routes/judge.calibration'
+import { Route as JudgeCorrectionsRouteImport } from './routes/judge.corrections'
 import { Route as JudgeTeamsRouteImport } from './routes/judge.teams'
 import { Route as LoginAdminRouteImport } from './routes/login.admin'
 import { Route as LoginCompetitorRouteImport } from './routes/login.competitor'
 import { Route as LoginJudgeRouteImport } from './routes/login.judge'
+import { Route as JudgeEvaluateTeamIdRouteImport } from './routes/judge.evaluate.$teamId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -80,6 +82,11 @@ const JudgeCalibrationRoute = JudgeCalibrationRouteImport.update({
   path: '/calibration',
   getParentRoute: () => JudgeRoute,
 } as any)
+const JudgeCorrectionsRoute = JudgeCorrectionsRouteImport.update({
+  id: '/corrections',
+  path: '/corrections',
+  getParentRoute: () => JudgeRoute,
+} as any)
 const JudgeTeamsRoute = JudgeTeamsRouteImport.update({
   id: '/teams',
   path: '/teams',
@@ -100,6 +107,11 @@ const LoginJudgeRoute = LoginJudgeRouteImport.update({
   path: '/login/judge',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JudgeEvaluateTeamIdRoute = JudgeEvaluateTeamIdRouteImport.update({
+  id: '/evaluate/$teamId',
+  path: '/evaluate/$teamId',
+  getParentRoute: () => JudgeRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -111,12 +123,14 @@ export interface FileRoutesByFullPath {
   '/competitor/profile': typeof CompetitorProfileRoute
   '/competitor/updates': typeof CompetitorUpdatesRoute
   '/judge/calibration': typeof JudgeCalibrationRoute
+  '/judge/corrections': typeof JudgeCorrectionsRoute
   '/judge/teams': typeof JudgeTeamsRoute
   '/login/admin': typeof LoginAdminRoute
   '/login/competitor': typeof LoginCompetitorRoute
   '/login/judge': typeof LoginJudgeRoute
   '/competitor/': typeof CompetitorIndexRoute
   '/judge/': typeof JudgeIndexRoute
+  '/judge/evaluate/$teamId': typeof JudgeEvaluateTeamIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -126,12 +140,14 @@ export interface FileRoutesByTo {
   '/competitor/profile': typeof CompetitorProfileRoute
   '/competitor/updates': typeof CompetitorUpdatesRoute
   '/judge/calibration': typeof JudgeCalibrationRoute
+  '/judge/corrections': typeof JudgeCorrectionsRoute
   '/judge/teams': typeof JudgeTeamsRoute
   '/login/admin': typeof LoginAdminRoute
   '/login/competitor': typeof LoginCompetitorRoute
   '/login/judge': typeof LoginJudgeRoute
   '/competitor': typeof CompetitorIndexRoute
   '/judge': typeof JudgeIndexRoute
+  '/judge/evaluate/$teamId': typeof JudgeEvaluateTeamIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -144,12 +160,14 @@ export interface FileRoutesById {
   '/competitor/profile': typeof CompetitorProfileRoute
   '/competitor/updates': typeof CompetitorUpdatesRoute
   '/judge/calibration': typeof JudgeCalibrationRoute
+  '/judge/corrections': typeof JudgeCorrectionsRoute
   '/judge/teams': typeof JudgeTeamsRoute
   '/login/admin': typeof LoginAdminRoute
   '/login/competitor': typeof LoginCompetitorRoute
   '/login/judge': typeof LoginJudgeRoute
   '/competitor/': typeof CompetitorIndexRoute
   '/judge/': typeof JudgeIndexRoute
+  '/judge/evaluate/$teamId': typeof JudgeEvaluateTeamIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -163,12 +181,14 @@ export interface FileRouteTypes {
     | '/competitor/profile'
     | '/competitor/updates'
     | '/judge/calibration'
+    | '/judge/corrections'
     | '/judge/teams'
     | '/login/admin'
     | '/login/competitor'
     | '/login/judge'
     | '/competitor/'
     | '/judge/'
+    | '/judge/evaluate/$teamId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -178,12 +198,14 @@ export interface FileRouteTypes {
     | '/competitor/profile'
     | '/competitor/updates'
     | '/judge/calibration'
+    | '/judge/corrections'
     | '/judge/teams'
     | '/login/admin'
     | '/login/competitor'
     | '/login/judge'
     | '/competitor'
     | '/judge'
+    | '/judge/evaluate/$teamId'
   id:
     | '__root__'
     | '/'
@@ -195,12 +217,14 @@ export interface FileRouteTypes {
     | '/competitor/profile'
     | '/competitor/updates'
     | '/judge/calibration'
+    | '/judge/corrections'
     | '/judge/teams'
     | '/login/admin'
     | '/login/competitor'
     | '/login/judge'
     | '/competitor/'
     | '/judge/'
+    | '/judge/evaluate/$teamId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -292,6 +316,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JudgeCalibrationRouteImport
       parentRoute: typeof JudgeRoute
     }
+    '/judge/corrections': {
+      id: '/judge/corrections'
+      path: '/corrections'
+      fullPath: '/judge/corrections'
+      preLoaderRoute: typeof JudgeCorrectionsRouteImport
+      parentRoute: typeof JudgeRoute
+    }
     '/judge/teams': {
       id: '/judge/teams'
       path: '/teams'
@@ -320,6 +351,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginJudgeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/judge/evaluate/$teamId': {
+      id: '/judge/evaluate/$teamId'
+      path: '/evaluate/$teamId'
+      fullPath: '/judge/evaluate/$teamId'
+      preLoaderRoute: typeof JudgeEvaluateTeamIdRouteImport
+      parentRoute: typeof JudgeRoute
+    }
   }
 }
 
@@ -345,14 +383,18 @@ const CompetitorRouteWithChildren = CompetitorRoute._addFileChildren(
 
 interface JudgeRouteChildren {
   JudgeCalibrationRoute: typeof JudgeCalibrationRoute
+  JudgeCorrectionsRoute: typeof JudgeCorrectionsRoute
   JudgeTeamsRoute: typeof JudgeTeamsRoute
   JudgeIndexRoute: typeof JudgeIndexRoute
+  JudgeEvaluateTeamIdRoute: typeof JudgeEvaluateTeamIdRoute
 }
 
 const JudgeRouteChildren: JudgeRouteChildren = {
   JudgeCalibrationRoute: JudgeCalibrationRoute,
+  JudgeCorrectionsRoute: JudgeCorrectionsRoute,
   JudgeTeamsRoute: JudgeTeamsRoute,
   JudgeIndexRoute: JudgeIndexRoute,
+  JudgeEvaluateTeamIdRoute: JudgeEvaluateTeamIdRoute,
 }
 
 const JudgeRouteWithChildren = JudgeRoute._addFileChildren(JudgeRouteChildren)
