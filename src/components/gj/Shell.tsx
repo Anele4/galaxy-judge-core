@@ -4,6 +4,7 @@
  * Also enforces role-based route protection (Access Restricted screen).
  */
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
+import type { LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
 import { useGJ } from "@/lib/gj/store";
 import type { Role } from "@/lib/gj/types";
@@ -12,7 +13,7 @@ import { Button, Card } from "./ui";
 export interface NavItem {
   to: string;
   label: string;
-  icon: string;
+  icon: LucideIcon;
 }
 
 const LOGIN_ROUTE: Record<Role, string> = {
