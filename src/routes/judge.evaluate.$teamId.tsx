@@ -172,9 +172,9 @@ function EvaluationWorkspace() {
     <div className="space-y-4">
       {/* status strip */}
       <div className="flex flex-wrap items-center gap-2">
-        <Badge tone="info">🔒 Independent Evaluation Active</Badge>
-        {online ? <Badge tone="success">🟢 Connected</Badge> : <Badge tone="danger">🔴 Offline Evaluation Active</Badge>}
-        {syncing ? <Badge tone="warning">🔄 Synchronising secure evaluation…</Badge> : null}
+        <Badge tone="info">Independent evaluation active</Badge>
+        {online ? <Badge tone="success">Connected</Badge> : <Badge tone="danger">Offline evaluation active</Badge>}
+        {syncing ? <Badge tone="warning">Synchronising securely…</Badge> : null}
         {savedAt ? <Badge>✓ Last saved {savedAt}</Badge> : null}
         <label className="ml-auto flex items-center gap-2 text-sm font-semibold">
           <input type="checkbox" checked={blind} onChange={(e) => setBlind(e.target.checked)} /> Blind mode
@@ -182,7 +182,7 @@ function EvaluationWorkspace() {
       </div>
 
       {!online ? (
-        <Notice tone="danger" title="🔴 Connection unavailable">
+        <Notice tone="danger" title="Connection unavailable">
           Your work is safely stored on this device. Continue scoring — Galaxy Judge will
           synchronise your evaluation securely when the connection returns.
         </Notice>
@@ -196,7 +196,7 @@ function EvaluationWorkspace() {
       ) : null}
 
       {locked ? (
-        <Notice tone="success" title="🔒 Evaluation Locked">
+        <Notice tone="success" title="Evaluation locked">
           Your independent evaluation has been securely recorded. Submission ID {judge.id}:{team.id} ·{" "}
           {existing?.submittedAt} · Final score {weightedScore(existing!.scores, rubric).toFixed(1)} / 100.
           <div className="mt-3">
@@ -283,7 +283,7 @@ function EvaluationWorkspace() {
 
               {/* AI Evidence Copilot */}
               <div className="mt-4 rounded-2xl border border-border p-4">
-                <p className="font-bold">✨ AI Evidence Copilot</p>
+                <p className="font-bold">AI Evidence Copilot</p>
                 <p className="mt-1 text-xs text-muted-foreground">
                   Relevant evidence found for {criterion.name.toLowerCase()}:
                 </p>
@@ -410,7 +410,7 @@ function EvaluationWorkspace() {
               ) : null}
 
               {showShield && flags.length ? (
-                <Notice tone="warning" title="🛡 Fairness Shield — review recommended">
+                <Notice tone="warning" title="Fairness Shield — review recommended">
                   {flags.map((f) => (
                     <p key={f} className="mt-1">{f}</p>
                   ))}
@@ -426,7 +426,7 @@ function EvaluationWorkspace() {
                       onClick={() => {
                         persist(false, "locked");
                         setShowShield(false);
-                        toast.success("🔒 Evaluation locked");
+                        toast.success("Evaluation locked");
                       }}
                     >
                       Continue to submit
@@ -451,7 +451,7 @@ function EvaluationWorkspace() {
                       return;
                     }
                     persist(false, "locked");
-                    toast.success("🔒 Evaluation locked");
+                    toast.success("Evaluation locked");
                   }}
                 >
                   Submit &amp; lock evaluation

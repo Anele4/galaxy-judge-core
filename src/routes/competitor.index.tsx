@@ -21,7 +21,7 @@ function CompetitorHome() {
   const finalStatus =
     data.competition.resultsReleased
       ? team.status === "Winner"
-        ? "🥇 Competition Winner"
+        ? "Competition winner"
         : "Competition completed. Thank you for participating."
       : null;
 

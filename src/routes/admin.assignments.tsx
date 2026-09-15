@@ -60,7 +60,7 @@ function Assignments() {
         <Notice tone="warning" title="Conflicts requiring action">
           {conflicts.map(({ j, t }) => (
             <div key={`${j.id}${t}`} className="mt-2 flex flex-wrap items-center gap-3">
-              <span>⚠ {j.name} has declared a conflict with Team {t}.</span>
+              <span>{j.name} has declared a conflict with Team {t}.</span>
               <Button variant="outline" onClick={() => reassign(j.id, t)}>Reassign team</Button>
             </div>
           ))}

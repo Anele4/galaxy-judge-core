@@ -54,7 +54,7 @@ function CommandCentre() {
         <Notice tone="warning" title="Attention required">
           {conflicts.map((c) => (
             <p key={`${c.judge.id}-${c.team}`}>
-              ⚠ {c.judge.name} has declared a conflict with Team {c.team}.
+              {c.judge.name} has declared a conflict with Team {c.team}.
             </p>
           ))}
           <Link to="/admin/assignments" className="mt-3 inline-block font-semibold underline">

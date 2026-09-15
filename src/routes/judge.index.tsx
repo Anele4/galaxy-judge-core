@@ -29,7 +29,7 @@ function JudgeHome() {
         <h1 className="mt-1 text-2xl font-black sm:text-3xl">{judge.name}</h1>
         <p className="mt-2 opacity-85">{judge.expertise} · {judge.organisation}</p>
         <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-primary-foreground/15 px-4 py-1.5 text-sm font-semibold">
-          🔒 Independent Evaluation Active
+          Independent evaluation active
         </div>
       </Card>
 

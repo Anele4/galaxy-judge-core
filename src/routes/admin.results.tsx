@@ -82,7 +82,7 @@ function Results() {
             <tbody>
               {rankings.map((r, i) => (
                 <tr key={r.team.id} onClick={() => setSelected(r.team.id)} className="cursor-pointer">
-                  <td className="text-lg">{i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : i + 1}</td>
+                  <td className="text-lg">{i + 1}</td>
                   <td className="font-semibold">{r.team.id}</td>
                   <td>{r.team.name}</td>
                   <td className="tabular-nums font-bold text-primary">{r.score.toFixed(1)}</td>

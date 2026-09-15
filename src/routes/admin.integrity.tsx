@@ -20,9 +20,9 @@ function Integrity() {
 
   return (
     <div className="space-y-6">
-      <SectionTitle title="🔐 Integrity Centre" subtitle="One view of the health of the competition." />
+      <SectionTitle title="Integrity Centre" subtitle="One view of the health of the competition." />
 
-      <Notice tone={healthy ? "success" : "warning"} title={healthy ? "🟢 Competition Integrity Healthy" : "🟠 Review recommended"}>
+      <Notice tone={healthy ? "success" : "warning"} title={healthy ? "Competition integrity healthy" : "Review recommended"}>
         {healthy
           ? "Score privacy is protected, no unauthorised changes were detected and the audit trail is complete."
           : "Some items need administrative attention before results are consolidated."}
