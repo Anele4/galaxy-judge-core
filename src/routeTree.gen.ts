@@ -15,10 +15,16 @@ import { Route as CompetitorRouteImport } from './routes/competitor'
 import { Route as JudgeRouteImport } from './routes/judge'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminAnnouncementsRouteImport } from './routes/admin.announcements'
 import { Route as AdminAssignmentsRouteImport } from './routes/admin.assignments'
+import { Route as AdminAuditRouteImport } from './routes/admin.audit'
 import { Route as AdminCompetitorsRouteImport } from './routes/admin.competitors'
+import { Route as AdminCorrectionsRouteImport } from './routes/admin.corrections'
+import { Route as AdminIntegrityRouteImport } from './routes/admin.integrity'
+import { Route as AdminIntelligenceRouteImport } from './routes/admin.intelligence'
 import { Route as AdminJudgesRouteImport } from './routes/admin.judges'
 import { Route as AdminMonitorRouteImport } from './routes/admin.monitor'
+import { Route as AdminResultsRouteImport } from './routes/admin.results'
 import { Route as CompetitorIndexRouteImport } from './routes/competitor.index'
 import { Route as CompetitorApplicationRouteImport } from './routes/competitor.application'
 import { Route as CompetitorDocumentsRouteImport } from './routes/competitor.documents'
@@ -63,14 +69,39 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminAnnouncementsRoute = AdminAnnouncementsRouteImport.update({
+  id: '/announcements',
+  path: '/announcements',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminAssignmentsRoute = AdminAssignmentsRouteImport.update({
   id: '/assignments',
   path: '/assignments',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminAuditRoute = AdminAuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminCompetitorsRoute = AdminCompetitorsRouteImport.update({
   id: '/competitors',
   path: '/competitors',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCorrectionsRoute = AdminCorrectionsRouteImport.update({
+  id: '/corrections',
+  path: '/corrections',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminIntegrityRoute = AdminIntegrityRouteImport.update({
+  id: '/integrity',
+  path: '/integrity',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminIntelligenceRoute = AdminIntelligenceRouteImport.update({
+  id: '/intelligence',
+  path: '/intelligence',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminJudgesRoute = AdminJudgesRouteImport.update({
@@ -81,6 +112,11 @@ const AdminJudgesRoute = AdminJudgesRouteImport.update({
 const AdminMonitorRoute = AdminMonitorRouteImport.update({
   id: '/monitor',
   path: '/monitor',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminResultsRoute = AdminResultsRouteImport.update({
+  id: '/results',
+  path: '/results',
   getParentRoute: () => AdminRoute,
 } as any)
 const CompetitorIndexRoute = CompetitorIndexRouteImport.update({
@@ -155,10 +191,16 @@ export interface FileRoutesByFullPath {
   '/competitor': typeof CompetitorRouteWithChildren
   '/judge': typeof JudgeRouteWithChildren
   '/register': typeof RegisterRoute
+  '/admin/announcements': typeof AdminAnnouncementsRoute
   '/admin/assignments': typeof AdminAssignmentsRoute
+  '/admin/audit': typeof AdminAuditRoute
   '/admin/competitors': typeof AdminCompetitorsRoute
+  '/admin/corrections': typeof AdminCorrectionsRoute
+  '/admin/integrity': typeof AdminIntegrityRoute
+  '/admin/intelligence': typeof AdminIntelligenceRoute
   '/admin/judges': typeof AdminJudgesRoute
   '/admin/monitor': typeof AdminMonitorRoute
+  '/admin/results': typeof AdminResultsRoute
   '/competitor/application': typeof CompetitorApplicationRoute
   '/competitor/documents': typeof CompetitorDocumentsRoute
   '/competitor/profile': typeof CompetitorProfileRoute
@@ -177,10 +219,16 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/register': typeof RegisterRoute
+  '/admin/announcements': typeof AdminAnnouncementsRoute
   '/admin/assignments': typeof AdminAssignmentsRoute
+  '/admin/audit': typeof AdminAuditRoute
   '/admin/competitors': typeof AdminCompetitorsRoute
+  '/admin/corrections': typeof AdminCorrectionsRoute
+  '/admin/integrity': typeof AdminIntegrityRoute
+  '/admin/intelligence': typeof AdminIntelligenceRoute
   '/admin/judges': typeof AdminJudgesRoute
   '/admin/monitor': typeof AdminMonitorRoute
+  '/admin/results': typeof AdminResultsRoute
   '/competitor/application': typeof CompetitorApplicationRoute
   '/competitor/documents': typeof CompetitorDocumentsRoute
   '/competitor/profile': typeof CompetitorProfileRoute
@@ -203,10 +251,16 @@ export interface FileRoutesById {
   '/competitor': typeof CompetitorRouteWithChildren
   '/judge': typeof JudgeRouteWithChildren
   '/register': typeof RegisterRoute
+  '/admin/announcements': typeof AdminAnnouncementsRoute
   '/admin/assignments': typeof AdminAssignmentsRoute
+  '/admin/audit': typeof AdminAuditRoute
   '/admin/competitors': typeof AdminCompetitorsRoute
+  '/admin/corrections': typeof AdminCorrectionsRoute
+  '/admin/integrity': typeof AdminIntegrityRoute
+  '/admin/intelligence': typeof AdminIntelligenceRoute
   '/admin/judges': typeof AdminJudgesRoute
   '/admin/monitor': typeof AdminMonitorRoute
+  '/admin/results': typeof AdminResultsRoute
   '/competitor/application': typeof CompetitorApplicationRoute
   '/competitor/documents': typeof CompetitorDocumentsRoute
   '/competitor/profile': typeof CompetitorProfileRoute
@@ -230,10 +284,16 @@ export interface FileRouteTypes {
     | '/competitor'
     | '/judge'
     | '/register'
+    | '/admin/announcements'
     | '/admin/assignments'
+    | '/admin/audit'
     | '/admin/competitors'
+    | '/admin/corrections'
+    | '/admin/integrity'
+    | '/admin/intelligence'
     | '/admin/judges'
     | '/admin/monitor'
+    | '/admin/results'
     | '/competitor/application'
     | '/competitor/documents'
     | '/competitor/profile'
@@ -252,10 +312,16 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/register'
+    | '/admin/announcements'
     | '/admin/assignments'
+    | '/admin/audit'
     | '/admin/competitors'
+    | '/admin/corrections'
+    | '/admin/integrity'
+    | '/admin/intelligence'
     | '/admin/judges'
     | '/admin/monitor'
+    | '/admin/results'
     | '/competitor/application'
     | '/competitor/documents'
     | '/competitor/profile'
@@ -277,10 +343,16 @@ export interface FileRouteTypes {
     | '/competitor'
     | '/judge'
     | '/register'
+    | '/admin/announcements'
     | '/admin/assignments'
+    | '/admin/audit'
     | '/admin/competitors'
+    | '/admin/corrections'
+    | '/admin/integrity'
+    | '/admin/intelligence'
     | '/admin/judges'
     | '/admin/monitor'
+    | '/admin/results'
     | '/competitor/application'
     | '/competitor/documents'
     | '/competitor/profile'
@@ -352,6 +424,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/announcements': {
+      id: '/admin/announcements'
+      path: '/announcements'
+      fullPath: '/admin/announcements'
+      preLoaderRoute: typeof AdminAnnouncementsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/assignments': {
       id: '/admin/assignments'
       path: '/assignments'
@@ -359,11 +438,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAssignmentsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/audit': {
+      id: '/admin/audit'
+      path: '/audit'
+      fullPath: '/admin/audit'
+      preLoaderRoute: typeof AdminAuditRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/competitors': {
       id: '/admin/competitors'
       path: '/competitors'
       fullPath: '/admin/competitors'
       preLoaderRoute: typeof AdminCompetitorsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/corrections': {
+      id: '/admin/corrections'
+      path: '/corrections'
+      fullPath: '/admin/corrections'
+      preLoaderRoute: typeof AdminCorrectionsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/integrity': {
+      id: '/admin/integrity'
+      path: '/integrity'
+      fullPath: '/admin/integrity'
+      preLoaderRoute: typeof AdminIntegrityRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/intelligence': {
+      id: '/admin/intelligence'
+      path: '/intelligence'
+      fullPath: '/admin/intelligence'
+      preLoaderRoute: typeof AdminIntelligenceRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/judges': {
@@ -378,6 +485,13 @@ declare module '@tanstack/react-router' {
       path: '/monitor'
       fullPath: '/admin/monitor'
       preLoaderRoute: typeof AdminMonitorRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/results': {
+      id: '/admin/results'
+      path: '/results'
+      fullPath: '/admin/results'
+      preLoaderRoute: typeof AdminResultsRouteImport
       parentRoute: typeof AdminRoute
     }
     '/competitor/': {
@@ -475,18 +589,30 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminAnnouncementsRoute: typeof AdminAnnouncementsRoute
   AdminAssignmentsRoute: typeof AdminAssignmentsRoute
+  AdminAuditRoute: typeof AdminAuditRoute
   AdminCompetitorsRoute: typeof AdminCompetitorsRoute
+  AdminCorrectionsRoute: typeof AdminCorrectionsRoute
+  AdminIntegrityRoute: typeof AdminIntegrityRoute
+  AdminIntelligenceRoute: typeof AdminIntelligenceRoute
   AdminJudgesRoute: typeof AdminJudgesRoute
   AdminMonitorRoute: typeof AdminMonitorRoute
+  AdminResultsRoute: typeof AdminResultsRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminAnnouncementsRoute: AdminAnnouncementsRoute,
   AdminAssignmentsRoute: AdminAssignmentsRoute,
+  AdminAuditRoute: AdminAuditRoute,
   AdminCompetitorsRoute: AdminCompetitorsRoute,
+  AdminCorrectionsRoute: AdminCorrectionsRoute,
+  AdminIntegrityRoute: AdminIntegrityRoute,
+  AdminIntelligenceRoute: AdminIntelligenceRoute,
   AdminJudgesRoute: AdminJudgesRoute,
   AdminMonitorRoute: AdminMonitorRoute,
+  AdminResultsRoute: AdminResultsRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
