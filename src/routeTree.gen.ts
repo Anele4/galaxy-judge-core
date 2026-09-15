@@ -10,33 +10,80 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as LoginAdminRouteImport } from './routes/login.admin'
+import { Route as LoginCompetitorRouteImport } from './routes/login.competitor'
+import { Route as LoginJudgeRouteImport } from './routes/login.judge'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginAdminRoute = LoginAdminRouteImport.update({
+  id: '/login/admin',
+  path: '/login/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginCompetitorRoute = LoginCompetitorRouteImport.update({
+  id: '/login/competitor',
+  path: '/login/competitor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginJudgeRoute = LoginJudgeRouteImport.update({
+  id: '/login/judge',
+  path: '/login/judge',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/register': typeof RegisterRoute
+  '/login/admin': typeof LoginAdminRoute
+  '/login/competitor': typeof LoginCompetitorRoute
+  '/login/judge': typeof LoginJudgeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/register': typeof RegisterRoute
+  '/login/admin': typeof LoginAdminRoute
+  '/login/competitor': typeof LoginCompetitorRoute
+  '/login/judge': typeof LoginJudgeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/register': typeof RegisterRoute
+  '/login/admin': typeof LoginAdminRoute
+  '/login/competitor': typeof LoginCompetitorRoute
+  '/login/judge': typeof LoginJudgeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/register' | '/login/admin' | '/login/competitor' | '/login/judge'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/register' | '/login/admin' | '/login/competitor' | '/login/judge'
+  id:
+    | '__root__'
+    | '/'
+    | '/register'
+    | '/login/admin'
+    | '/login/competitor'
+    | '/login/judge'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  RegisterRoute: typeof RegisterRoute
+  LoginAdminRoute: typeof LoginAdminRoute
+  LoginCompetitorRoute: typeof LoginCompetitorRoute
+  LoginJudgeRoute: typeof LoginJudgeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +95,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login/admin': {
+      id: '/login/admin'
+      path: '/login/admin'
+      fullPath: '/login/admin'
+      preLoaderRoute: typeof LoginAdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login/competitor': {
+      id: '/login/competitor'
+      path: '/login/competitor'
+      fullPath: '/login/competitor'
+      preLoaderRoute: typeof LoginCompetitorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login/judge': {
+      id: '/login/judge'
+      path: '/login/judge'
+      fullPath: '/login/judge'
+      preLoaderRoute: typeof LoginJudgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  RegisterRoute: RegisterRoute,
+  LoginAdminRoute: LoginAdminRoute,
+  LoginCompetitorRoute: LoginCompetitorRoute,
+  LoginJudgeRoute: LoginJudgeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
