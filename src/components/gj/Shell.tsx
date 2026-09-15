@@ -4,7 +4,7 @@
  * Also enforces role-based route protection (Access Restricted screen).
  */
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import type { LucideIcon } from "lucide-react";
+import { Lock, type LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
 import { useGJ } from "@/lib/gj/store";
 import type { Role } from "@/lib/gj/types";
