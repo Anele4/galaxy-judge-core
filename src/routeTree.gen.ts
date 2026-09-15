@@ -10,33 +10,374 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as CompetitorRouteImport } from './routes/competitor'
+import { Route as JudgeRouteImport } from './routes/judge'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminAnnouncementsRouteImport } from './routes/admin.announcements'
+import { Route as AdminAssignmentsRouteImport } from './routes/admin.assignments'
+import { Route as AdminAuditRouteImport } from './routes/admin.audit'
+import { Route as AdminCompetitorsRouteImport } from './routes/admin.competitors'
+import { Route as AdminCorrectionsRouteImport } from './routes/admin.corrections'
+import { Route as AdminIntegrityRouteImport } from './routes/admin.integrity'
+import { Route as AdminIntelligenceRouteImport } from './routes/admin.intelligence'
+import { Route as AdminJudgesRouteImport } from './routes/admin.judges'
+import { Route as AdminMonitorRouteImport } from './routes/admin.monitor'
+import { Route as AdminResultsRouteImport } from './routes/admin.results'
+import { Route as CompetitorIndexRouteImport } from './routes/competitor.index'
+import { Route as CompetitorApplicationRouteImport } from './routes/competitor.application'
+import { Route as CompetitorDocumentsRouteImport } from './routes/competitor.documents'
+import { Route as CompetitorProfileRouteImport } from './routes/competitor.profile'
+import { Route as CompetitorUpdatesRouteImport } from './routes/competitor.updates'
+import { Route as JudgeIndexRouteImport } from './routes/judge.index'
+import { Route as JudgeCalibrationRouteImport } from './routes/judge.calibration'
+import { Route as JudgeCorrectionsRouteImport } from './routes/judge.corrections'
+import { Route as JudgeTeamsRouteImport } from './routes/judge.teams'
+import { Route as LoginAdminRouteImport } from './routes/login.admin'
+import { Route as LoginCompetitorRouteImport } from './routes/login.competitor'
+import { Route as LoginJudgeRouteImport } from './routes/login.judge'
+import { Route as JudgeEvaluateTeamIdRouteImport } from './routes/judge.evaluate.$teamId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompetitorRoute = CompetitorRouteImport.update({
+  id: '/competitor',
+  path: '/competitor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JudgeRoute = JudgeRouteImport.update({
+  id: '/judge',
+  path: '/judge',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAnnouncementsRoute = AdminAnnouncementsRouteImport.update({
+  id: '/announcements',
+  path: '/announcements',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAssignmentsRoute = AdminAssignmentsRouteImport.update({
+  id: '/assignments',
+  path: '/assignments',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAuditRoute = AdminAuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCompetitorsRoute = AdminCompetitorsRouteImport.update({
+  id: '/competitors',
+  path: '/competitors',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCorrectionsRoute = AdminCorrectionsRouteImport.update({
+  id: '/corrections',
+  path: '/corrections',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminIntegrityRoute = AdminIntegrityRouteImport.update({
+  id: '/integrity',
+  path: '/integrity',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminIntelligenceRoute = AdminIntelligenceRouteImport.update({
+  id: '/intelligence',
+  path: '/intelligence',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminJudgesRoute = AdminJudgesRouteImport.update({
+  id: '/judges',
+  path: '/judges',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMonitorRoute = AdminMonitorRouteImport.update({
+  id: '/monitor',
+  path: '/monitor',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminResultsRoute = AdminResultsRouteImport.update({
+  id: '/results',
+  path: '/results',
+  getParentRoute: () => AdminRoute,
+} as any)
+const CompetitorIndexRoute = CompetitorIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CompetitorRoute,
+} as any)
+const CompetitorApplicationRoute = CompetitorApplicationRouteImport.update({
+  id: '/application',
+  path: '/application',
+  getParentRoute: () => CompetitorRoute,
+} as any)
+const CompetitorDocumentsRoute = CompetitorDocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => CompetitorRoute,
+} as any)
+const CompetitorProfileRoute = CompetitorProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => CompetitorRoute,
+} as any)
+const CompetitorUpdatesRoute = CompetitorUpdatesRouteImport.update({
+  id: '/updates',
+  path: '/updates',
+  getParentRoute: () => CompetitorRoute,
+} as any)
+const JudgeIndexRoute = JudgeIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => JudgeRoute,
+} as any)
+const JudgeCalibrationRoute = JudgeCalibrationRouteImport.update({
+  id: '/calibration',
+  path: '/calibration',
+  getParentRoute: () => JudgeRoute,
+} as any)
+const JudgeCorrectionsRoute = JudgeCorrectionsRouteImport.update({
+  id: '/corrections',
+  path: '/corrections',
+  getParentRoute: () => JudgeRoute,
+} as any)
+const JudgeTeamsRoute = JudgeTeamsRouteImport.update({
+  id: '/teams',
+  path: '/teams',
+  getParentRoute: () => JudgeRoute,
+} as any)
+const LoginAdminRoute = LoginAdminRouteImport.update({
+  id: '/login/admin',
+  path: '/login/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginCompetitorRoute = LoginCompetitorRouteImport.update({
+  id: '/login/competitor',
+  path: '/login/competitor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginJudgeRoute = LoginJudgeRouteImport.update({
+  id: '/login/judge',
+  path: '/login/judge',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JudgeEvaluateTeamIdRoute = JudgeEvaluateTeamIdRouteImport.update({
+  id: '/evaluate/$teamId',
+  path: '/evaluate/$teamId',
+  getParentRoute: () => JudgeRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/competitor': typeof CompetitorRouteWithChildren
+  '/judge': typeof JudgeRouteWithChildren
+  '/register': typeof RegisterRoute
+  '/admin/announcements': typeof AdminAnnouncementsRoute
+  '/admin/assignments': typeof AdminAssignmentsRoute
+  '/admin/audit': typeof AdminAuditRoute
+  '/admin/competitors': typeof AdminCompetitorsRoute
+  '/admin/corrections': typeof AdminCorrectionsRoute
+  '/admin/integrity': typeof AdminIntegrityRoute
+  '/admin/intelligence': typeof AdminIntelligenceRoute
+  '/admin/judges': typeof AdminJudgesRoute
+  '/admin/monitor': typeof AdminMonitorRoute
+  '/admin/results': typeof AdminResultsRoute
+  '/competitor/application': typeof CompetitorApplicationRoute
+  '/competitor/documents': typeof CompetitorDocumentsRoute
+  '/competitor/profile': typeof CompetitorProfileRoute
+  '/competitor/updates': typeof CompetitorUpdatesRoute
+  '/judge/calibration': typeof JudgeCalibrationRoute
+  '/judge/corrections': typeof JudgeCorrectionsRoute
+  '/judge/teams': typeof JudgeTeamsRoute
+  '/login/admin': typeof LoginAdminRoute
+  '/login/competitor': typeof LoginCompetitorRoute
+  '/login/judge': typeof LoginJudgeRoute
+  '/admin/': typeof AdminIndexRoute
+  '/competitor/': typeof CompetitorIndexRoute
+  '/judge/': typeof JudgeIndexRoute
+  '/judge/evaluate/$teamId': typeof JudgeEvaluateTeamIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/register': typeof RegisterRoute
+  '/admin/announcements': typeof AdminAnnouncementsRoute
+  '/admin/assignments': typeof AdminAssignmentsRoute
+  '/admin/audit': typeof AdminAuditRoute
+  '/admin/competitors': typeof AdminCompetitorsRoute
+  '/admin/corrections': typeof AdminCorrectionsRoute
+  '/admin/integrity': typeof AdminIntegrityRoute
+  '/admin/intelligence': typeof AdminIntelligenceRoute
+  '/admin/judges': typeof AdminJudgesRoute
+  '/admin/monitor': typeof AdminMonitorRoute
+  '/admin/results': typeof AdminResultsRoute
+  '/competitor/application': typeof CompetitorApplicationRoute
+  '/competitor/documents': typeof CompetitorDocumentsRoute
+  '/competitor/profile': typeof CompetitorProfileRoute
+  '/competitor/updates': typeof CompetitorUpdatesRoute
+  '/judge/calibration': typeof JudgeCalibrationRoute
+  '/judge/corrections': typeof JudgeCorrectionsRoute
+  '/judge/teams': typeof JudgeTeamsRoute
+  '/login/admin': typeof LoginAdminRoute
+  '/login/competitor': typeof LoginCompetitorRoute
+  '/login/judge': typeof LoginJudgeRoute
+  '/admin': typeof AdminIndexRoute
+  '/competitor': typeof CompetitorIndexRoute
+  '/judge': typeof JudgeIndexRoute
+  '/judge/evaluate/$teamId': typeof JudgeEvaluateTeamIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/competitor': typeof CompetitorRouteWithChildren
+  '/judge': typeof JudgeRouteWithChildren
+  '/register': typeof RegisterRoute
+  '/admin/announcements': typeof AdminAnnouncementsRoute
+  '/admin/assignments': typeof AdminAssignmentsRoute
+  '/admin/audit': typeof AdminAuditRoute
+  '/admin/competitors': typeof AdminCompetitorsRoute
+  '/admin/corrections': typeof AdminCorrectionsRoute
+  '/admin/integrity': typeof AdminIntegrityRoute
+  '/admin/intelligence': typeof AdminIntelligenceRoute
+  '/admin/judges': typeof AdminJudgesRoute
+  '/admin/monitor': typeof AdminMonitorRoute
+  '/admin/results': typeof AdminResultsRoute
+  '/competitor/application': typeof CompetitorApplicationRoute
+  '/competitor/documents': typeof CompetitorDocumentsRoute
+  '/competitor/profile': typeof CompetitorProfileRoute
+  '/competitor/updates': typeof CompetitorUpdatesRoute
+  '/judge/calibration': typeof JudgeCalibrationRoute
+  '/judge/corrections': typeof JudgeCorrectionsRoute
+  '/judge/teams': typeof JudgeTeamsRoute
+  '/login/admin': typeof LoginAdminRoute
+  '/login/competitor': typeof LoginCompetitorRoute
+  '/login/judge': typeof LoginJudgeRoute
+  '/admin/': typeof AdminIndexRoute
+  '/competitor/': typeof CompetitorIndexRoute
+  '/judge/': typeof JudgeIndexRoute
+  '/judge/evaluate/$teamId': typeof JudgeEvaluateTeamIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/competitor'
+    | '/judge'
+    | '/register'
+    | '/admin/announcements'
+    | '/admin/assignments'
+    | '/admin/audit'
+    | '/admin/competitors'
+    | '/admin/corrections'
+    | '/admin/integrity'
+    | '/admin/intelligence'
+    | '/admin/judges'
+    | '/admin/monitor'
+    | '/admin/results'
+    | '/competitor/application'
+    | '/competitor/documents'
+    | '/competitor/profile'
+    | '/competitor/updates'
+    | '/judge/calibration'
+    | '/judge/corrections'
+    | '/judge/teams'
+    | '/login/admin'
+    | '/login/competitor'
+    | '/login/judge'
+    | '/admin/'
+    | '/competitor/'
+    | '/judge/'
+    | '/judge/evaluate/$teamId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/register'
+    | '/admin/announcements'
+    | '/admin/assignments'
+    | '/admin/audit'
+    | '/admin/competitors'
+    | '/admin/corrections'
+    | '/admin/integrity'
+    | '/admin/intelligence'
+    | '/admin/judges'
+    | '/admin/monitor'
+    | '/admin/results'
+    | '/competitor/application'
+    | '/competitor/documents'
+    | '/competitor/profile'
+    | '/competitor/updates'
+    | '/judge/calibration'
+    | '/judge/corrections'
+    | '/judge/teams'
+    | '/login/admin'
+    | '/login/competitor'
+    | '/login/judge'
+    | '/admin'
+    | '/competitor'
+    | '/judge'
+    | '/judge/evaluate/$teamId'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/competitor'
+    | '/judge'
+    | '/register'
+    | '/admin/announcements'
+    | '/admin/assignments'
+    | '/admin/audit'
+    | '/admin/competitors'
+    | '/admin/corrections'
+    | '/admin/integrity'
+    | '/admin/intelligence'
+    | '/admin/judges'
+    | '/admin/monitor'
+    | '/admin/results'
+    | '/competitor/application'
+    | '/competitor/documents'
+    | '/competitor/profile'
+    | '/competitor/updates'
+    | '/judge/calibration'
+    | '/judge/corrections'
+    | '/judge/teams'
+    | '/login/admin'
+    | '/login/competitor'
+    | '/login/judge'
+    | '/admin/'
+    | '/competitor/'
+    | '/judge/'
+    | '/judge/evaluate/$teamId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  CompetitorRoute: typeof CompetitorRouteWithChildren
+  JudgeRoute: typeof JudgeRouteWithChildren
+  RegisterRoute: typeof RegisterRoute
+  LoginAdminRoute: typeof LoginAdminRoute
+  LoginCompetitorRoute: typeof LoginCompetitorRoute
+  LoginJudgeRoute: typeof LoginJudgeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +389,282 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/competitor': {
+      id: '/competitor'
+      path: '/competitor'
+      fullPath: '/competitor'
+      preLoaderRoute: typeof CompetitorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/judge': {
+      id: '/judge'
+      path: '/judge'
+      fullPath: '/judge'
+      preLoaderRoute: typeof JudgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/announcements': {
+      id: '/admin/announcements'
+      path: '/announcements'
+      fullPath: '/admin/announcements'
+      preLoaderRoute: typeof AdminAnnouncementsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/assignments': {
+      id: '/admin/assignments'
+      path: '/assignments'
+      fullPath: '/admin/assignments'
+      preLoaderRoute: typeof AdminAssignmentsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/audit': {
+      id: '/admin/audit'
+      path: '/audit'
+      fullPath: '/admin/audit'
+      preLoaderRoute: typeof AdminAuditRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/competitors': {
+      id: '/admin/competitors'
+      path: '/competitors'
+      fullPath: '/admin/competitors'
+      preLoaderRoute: typeof AdminCompetitorsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/corrections': {
+      id: '/admin/corrections'
+      path: '/corrections'
+      fullPath: '/admin/corrections'
+      preLoaderRoute: typeof AdminCorrectionsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/integrity': {
+      id: '/admin/integrity'
+      path: '/integrity'
+      fullPath: '/admin/integrity'
+      preLoaderRoute: typeof AdminIntegrityRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/intelligence': {
+      id: '/admin/intelligence'
+      path: '/intelligence'
+      fullPath: '/admin/intelligence'
+      preLoaderRoute: typeof AdminIntelligenceRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/judges': {
+      id: '/admin/judges'
+      path: '/judges'
+      fullPath: '/admin/judges'
+      preLoaderRoute: typeof AdminJudgesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/monitor': {
+      id: '/admin/monitor'
+      path: '/monitor'
+      fullPath: '/admin/monitor'
+      preLoaderRoute: typeof AdminMonitorRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/results': {
+      id: '/admin/results'
+      path: '/results'
+      fullPath: '/admin/results'
+      preLoaderRoute: typeof AdminResultsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/competitor/': {
+      id: '/competitor/'
+      path: '/'
+      fullPath: '/competitor/'
+      preLoaderRoute: typeof CompetitorIndexRouteImport
+      parentRoute: typeof CompetitorRoute
+    }
+    '/competitor/application': {
+      id: '/competitor/application'
+      path: '/application'
+      fullPath: '/competitor/application'
+      preLoaderRoute: typeof CompetitorApplicationRouteImport
+      parentRoute: typeof CompetitorRoute
+    }
+    '/competitor/documents': {
+      id: '/competitor/documents'
+      path: '/documents'
+      fullPath: '/competitor/documents'
+      preLoaderRoute: typeof CompetitorDocumentsRouteImport
+      parentRoute: typeof CompetitorRoute
+    }
+    '/competitor/profile': {
+      id: '/competitor/profile'
+      path: '/profile'
+      fullPath: '/competitor/profile'
+      preLoaderRoute: typeof CompetitorProfileRouteImport
+      parentRoute: typeof CompetitorRoute
+    }
+    '/competitor/updates': {
+      id: '/competitor/updates'
+      path: '/updates'
+      fullPath: '/competitor/updates'
+      preLoaderRoute: typeof CompetitorUpdatesRouteImport
+      parentRoute: typeof CompetitorRoute
+    }
+    '/judge/': {
+      id: '/judge/'
+      path: '/'
+      fullPath: '/judge/'
+      preLoaderRoute: typeof JudgeIndexRouteImport
+      parentRoute: typeof JudgeRoute
+    }
+    '/judge/calibration': {
+      id: '/judge/calibration'
+      path: '/calibration'
+      fullPath: '/judge/calibration'
+      preLoaderRoute: typeof JudgeCalibrationRouteImport
+      parentRoute: typeof JudgeRoute
+    }
+    '/judge/corrections': {
+      id: '/judge/corrections'
+      path: '/corrections'
+      fullPath: '/judge/corrections'
+      preLoaderRoute: typeof JudgeCorrectionsRouteImport
+      parentRoute: typeof JudgeRoute
+    }
+    '/judge/teams': {
+      id: '/judge/teams'
+      path: '/teams'
+      fullPath: '/judge/teams'
+      preLoaderRoute: typeof JudgeTeamsRouteImport
+      parentRoute: typeof JudgeRoute
+    }
+    '/login/admin': {
+      id: '/login/admin'
+      path: '/login/admin'
+      fullPath: '/login/admin'
+      preLoaderRoute: typeof LoginAdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login/competitor': {
+      id: '/login/competitor'
+      path: '/login/competitor'
+      fullPath: '/login/competitor'
+      preLoaderRoute: typeof LoginCompetitorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login/judge': {
+      id: '/login/judge'
+      path: '/login/judge'
+      fullPath: '/login/judge'
+      preLoaderRoute: typeof LoginJudgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/judge/evaluate/$teamId': {
+      id: '/judge/evaluate/$teamId'
+      path: '/evaluate/$teamId'
+      fullPath: '/judge/evaluate/$teamId'
+      preLoaderRoute: typeof JudgeEvaluateTeamIdRouteImport
+      parentRoute: typeof JudgeRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminAnnouncementsRoute: typeof AdminAnnouncementsRoute
+  AdminAssignmentsRoute: typeof AdminAssignmentsRoute
+  AdminAuditRoute: typeof AdminAuditRoute
+  AdminCompetitorsRoute: typeof AdminCompetitorsRoute
+  AdminCorrectionsRoute: typeof AdminCorrectionsRoute
+  AdminIntegrityRoute: typeof AdminIntegrityRoute
+  AdminIntelligenceRoute: typeof AdminIntelligenceRoute
+  AdminJudgesRoute: typeof AdminJudgesRoute
+  AdminMonitorRoute: typeof AdminMonitorRoute
+  AdminResultsRoute: typeof AdminResultsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminAnnouncementsRoute: AdminAnnouncementsRoute,
+  AdminAssignmentsRoute: AdminAssignmentsRoute,
+  AdminAuditRoute: AdminAuditRoute,
+  AdminCompetitorsRoute: AdminCompetitorsRoute,
+  AdminCorrectionsRoute: AdminCorrectionsRoute,
+  AdminIntegrityRoute: AdminIntegrityRoute,
+  AdminIntelligenceRoute: AdminIntelligenceRoute,
+  AdminJudgesRoute: AdminJudgesRoute,
+  AdminMonitorRoute: AdminMonitorRoute,
+  AdminResultsRoute: AdminResultsRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface CompetitorRouteChildren {
+  CompetitorApplicationRoute: typeof CompetitorApplicationRoute
+  CompetitorDocumentsRoute: typeof CompetitorDocumentsRoute
+  CompetitorProfileRoute: typeof CompetitorProfileRoute
+  CompetitorUpdatesRoute: typeof CompetitorUpdatesRoute
+  CompetitorIndexRoute: typeof CompetitorIndexRoute
+}
+
+const CompetitorRouteChildren: CompetitorRouteChildren = {
+  CompetitorApplicationRoute: CompetitorApplicationRoute,
+  CompetitorDocumentsRoute: CompetitorDocumentsRoute,
+  CompetitorProfileRoute: CompetitorProfileRoute,
+  CompetitorUpdatesRoute: CompetitorUpdatesRoute,
+  CompetitorIndexRoute: CompetitorIndexRoute,
+}
+
+const CompetitorRouteWithChildren = CompetitorRoute._addFileChildren(
+  CompetitorRouteChildren,
+)
+
+interface JudgeRouteChildren {
+  JudgeCalibrationRoute: typeof JudgeCalibrationRoute
+  JudgeCorrectionsRoute: typeof JudgeCorrectionsRoute
+  JudgeTeamsRoute: typeof JudgeTeamsRoute
+  JudgeIndexRoute: typeof JudgeIndexRoute
+  JudgeEvaluateTeamIdRoute: typeof JudgeEvaluateTeamIdRoute
+}
+
+const JudgeRouteChildren: JudgeRouteChildren = {
+  JudgeCalibrationRoute: JudgeCalibrationRoute,
+  JudgeCorrectionsRoute: JudgeCorrectionsRoute,
+  JudgeTeamsRoute: JudgeTeamsRoute,
+  JudgeIndexRoute: JudgeIndexRoute,
+  JudgeEvaluateTeamIdRoute: JudgeEvaluateTeamIdRoute,
+}
+
+const JudgeRouteWithChildren = JudgeRoute._addFileChildren(JudgeRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
+  CompetitorRoute: CompetitorRouteWithChildren,
+  JudgeRoute: JudgeRouteWithChildren,
+  RegisterRoute: RegisterRoute,
+  LoginAdminRoute: LoginAdminRoute,
+  LoginCompetitorRoute: LoginCompetitorRoute,
+  LoginJudgeRoute: LoginJudgeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
