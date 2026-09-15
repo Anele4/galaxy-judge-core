@@ -4,7 +4,7 @@
  * Credentials are never displayed in the interface.
  */
 import { Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, ChevronDown, ShieldCheck } from "lucide-react";
+import { ArrowLeft, ShieldCheck } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useGJ } from "@/lib/gj/store";
