@@ -29,11 +29,13 @@ function rng(seed: number) {
   };
 }
 
-/* ---------- demo credentials (prototype only) ---------- */
-export const DEMO_CREDENTIALS = {
-  competitor: { email: "competitor01@galaxyjudge.demo", password: "Aqua#2026Solve" },
-  judge: { email: "judge01@galaxyjudge.demo", password: "Judge#2026Fair" },
-  admin: { email: "admin@galaxyjudge.demo", password: "Admin#2026Trust" },
+/* ---------- seeded account credentials (private; never rendered in the UI) ---------- */
+const SEED_ACCOUNTS = {
+  competitor: { email: "alpha.team@galaxyjudge.app", password: "Gj-Comp-4712" },
+  competitor2: { email: "ecogrid.team@galaxyjudge.app", password: "Gj-Comp-6033" },
+  judge: { email: "j.mokoena@galaxyjudge.app", password: "Gj-Judge-8135" },
+  judge2: { email: "k.sithole@galaxyjudge.app", password: "Gj-Judge-2694" },
+  admin: { email: "console.admin@galaxyjudge.app", password: "Gj-Admin-9058" },
 };
 
 /* ---------- rubric (admin-configurable, must total 100%) ---------- */
