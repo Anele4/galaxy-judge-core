@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { LoginPage } from "@/components/gj/LoginPage";
-import { DEMO_CREDENTIALS } from "@/lib/gj/data";
 
 export const Route = createFileRoute("/login/competitor")({
   head: () => ({
@@ -16,8 +15,6 @@ export const Route = createFileRoute("/login/competitor")({
       role="competitor"
       title="Your innovation. Your journey. Always clear."
       blurb="Submit your application, upload evidence and see exactly where you stand."
-      demoEmail={DEMO_CREDENTIALS.competitor.email}
-      demoPassword={DEMO_CREDENTIALS.competitor.password}
       footer={
         <span>
           New team?{" "}

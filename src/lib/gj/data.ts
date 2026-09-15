@@ -29,11 +29,13 @@ function rng(seed: number) {
   };
 }
 
-/* ---------- demo credentials (prototype only) ---------- */
-export const DEMO_CREDENTIALS = {
-  competitor: { email: "competitor01@galaxyjudge.demo", password: "Aqua#2026Solve" },
-  judge: { email: "judge01@galaxyjudge.demo", password: "Judge#2026Fair" },
-  admin: { email: "admin@galaxyjudge.demo", password: "Admin#2026Trust" },
+/* ---------- seeded account credentials (private; never rendered in the UI) ---------- */
+const SEED_ACCOUNTS = {
+  competitor: { email: "alpha.team@galaxyjudge.app", password: "Gj-Comp-4712" },
+  competitor2: { email: "ecogrid.team@galaxyjudge.app", password: "Gj-Comp-6033" },
+  judge: { email: "j.mokoena@galaxyjudge.app", password: "Gj-Judge-8135" },
+  judge2: { email: "k.sithole@galaxyjudge.app", password: "Gj-Judge-2694" },
+  admin: { email: "console.admin@galaxyjudge.app", password: "Gj-Admin-9058" },
 };
 
 /* ---------- rubric (admin-configurable, must total 100%) ---------- */
@@ -281,11 +283,11 @@ export function seedData(): GJData {
   pushAudit("Galaxy Judge Administrator", "admin", "Announcement published", "Top 20 announcement released", "2026-03-01 08:30");
 
   const accounts: Account[] = [
-    { id: "acc-admin", role: "admin", name: "Galaxy Judge Administrator", email: DEMO_CREDENTIALS.admin.email, password: DEMO_CREDENTIALS.admin.password, active: true },
-    { id: "acc-judge-1", role: "judge", name: JUDGE_NAMES[0]![0]!, email: DEMO_CREDENTIALS.judge.email, password: DEMO_CREDENTIALS.judge.password, active: true, linkedId: "J-01" },
-    { id: "acc-judge-2", role: "judge", name: JUDGE_NAMES[1]![0]!, email: "judge02@galaxyjudge.demo", password: "Judge#2026Panel", active: true, linkedId: "J-02" },
-    { id: "acc-comp-1", role: "competitor", name: "Demo Team Alpha", email: DEMO_CREDENTIALS.competitor.email, password: DEMO_CREDENTIALS.competitor.password, active: true, linkedId: "SFT-01" },
-    { id: "acc-comp-2", role: "competitor", name: "Team EcoGrid", email: "competitor02@galaxyjudge.demo", password: "Grid#2026Solve", active: true, linkedId: "SFT-08" },
+    { id: "acc-admin", role: "admin", name: "Galaxy Judge Administrator", email: SEED_ACCOUNTS.admin.email, password: SEED_ACCOUNTS.admin.password, active: true },
+    { id: "acc-judge-1", role: "judge", name: JUDGE_NAMES[0]![0]!, email: SEED_ACCOUNTS.judge.email, password: SEED_ACCOUNTS.judge.password, active: true, linkedId: "J-01" },
+    { id: "acc-judge-2", role: "judge", name: JUDGE_NAMES[1]![0]!, email: SEED_ACCOUNTS.judge2.email, password: SEED_ACCOUNTS.judge2.password, active: true, linkedId: "J-02" },
+    { id: "acc-comp-1", role: "competitor", name: "Demo Team Alpha", email: SEED_ACCOUNTS.competitor.email, password: SEED_ACCOUNTS.competitor.password, active: true, linkedId: "SFT-01" },
+    { id: "acc-comp-2", role: "competitor", name: "Team EcoGrid", email: SEED_ACCOUNTS.competitor2.email, password: SEED_ACCOUNTS.competitor2.password, active: true, linkedId: "SFT-08" },
   ];
 
   return {

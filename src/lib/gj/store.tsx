@@ -28,8 +28,8 @@ import type {
 } from "./types";
 import { weightedScore } from "./scoring";
 
-const KEY = "galaxy-judge-state-v1";
-const SESSION_KEY = "galaxy-judge-session-v1";
+const KEY = "galaxy-judge-state-v2";
+const SESSION_KEY = "galaxy-judge-session-v2";
 
 interface Ctx {
   data: GJData;

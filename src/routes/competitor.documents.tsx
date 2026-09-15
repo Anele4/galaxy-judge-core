@@ -100,7 +100,7 @@ function DocumentsPage() {
           }}
         >
           Drag and drop a file here, or use the button above. Files are stored locally in this
-          prototype (metadata only).
+          this environment (file metadata is recorded).
         </div>
       </Card>
 

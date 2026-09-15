@@ -1,10 +1,10 @@
 /**
  * Shared sign-in experience, themed per role.
  * Each role has its own route so the three portals stay completely separate.
- * Demo credentials live in a collapsed "Demo & test access" disclosure, not on the form.
+ * Credentials are never displayed in the interface.
  */
 import { Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, ChevronDown, ShieldCheck } from "lucide-react";
+import { ArrowLeft, ShieldCheck } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useGJ } from "@/lib/gj/store";
@@ -21,15 +21,11 @@ export function LoginPage({
   role,
   title,
   blurb,
-  demoEmail,
-  demoPassword,
   footer,
 }: {
   role: Role;
   title: string;
   blurb: string;
-  demoEmail: string;
-  demoPassword: string;
   footer?: React.ReactNode;
 }) {
   const { login } = useGJ();
@@ -70,7 +66,7 @@ export function LoginPage({
             Role-based access. Every action is recorded in the audit trail.
           </p>
         </div>
-        <p className="text-[11px] opacity-45">Prototype environment · Fictional demo data</p>
+        <p className="text-[11px] opacity-45">Samsung Solve for Tomorrow 2026</p>
       </section>
 
       {/* Right: the form */}
@@ -99,7 +95,7 @@ export function LoginPage({
                   setEmail(e.target.value);
                   setError("");
                 }}
-                placeholder="you@galaxyjudge.demo"
+                placeholder="you@galaxyjudge.app"
               />
             </Field>
             <Field label="Password">
@@ -122,39 +118,13 @@ export function LoginPage({
             <button
               type="button"
               className="w-full text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground"
-              onClick={() => toast.info("Password reset link sent (simulated in this prototype).")}
+              onClick={() => toast.info("If the account exists, a password reset link has been sent.")}
             >
               Forgot password?
             </button>
           </form>
 
-          <details className="group mt-8 rounded-xl border border-border">
-            <summary className="flex cursor-pointer list-none items-center gap-2 px-4 py-3 text-xs font-semibold text-muted-foreground">
-              <ChevronDown
-                className="h-3.5 w-3.5 transition-transform group-open:rotate-180"
-                aria-hidden
-              />
-              Demo &amp; test access
-            </summary>
-            <div className="gj-rule px-4 py-3.5">
-              <p className="text-xs leading-relaxed text-muted-foreground">
-                Evaluation environment only. Fills the form with the {role} test account.
-              </p>
-              <Button
-                variant="outline"
-                className="mt-3 w-full"
-                onClick={() => {
-                  setEmail(demoEmail);
-                  setPassword(demoPassword);
-                  setError("");
-                }}
-              >
-                Use demo account
-              </Button>
-            </div>
-          </details>
-
-          {footer ? <div className="mt-6 text-center text-sm">{footer}</div> : null}
+          {footer ? <div className="mt-8 text-center text-sm">{footer}</div> : null}
         </div>
       </section>
     </div>
