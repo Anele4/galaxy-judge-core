@@ -411,3 +411,15 @@
     border-color: var(--color-primary);
   }
 }
+
+@layer components {
+  /* Premium charcoal header band — replaces the old full-bleed blue gradient hero */
+  .gj-hero {
+    background: var(--color-ink);
+    color: var(--color-ink-foreground);
+    border-color: oklch(1 0 0 / 8%);
+  }
+  .gj-hero .text-muted-foreground {
+    color: oklch(1 0 0 / 62%);
+  }
+}
