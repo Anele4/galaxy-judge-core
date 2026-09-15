@@ -115,7 +115,7 @@ export function Shell({
                 to={item.to}
                 className={`gj-nav-link ${pathname === item.to ? "gj-nav-active" : ""}`}
               >
-                <span aria-hidden>{item.icon}</span>
+                <item.icon aria-hidden className="h-4 w-4" />
                 {item.label}
               </Link>
             ))}
