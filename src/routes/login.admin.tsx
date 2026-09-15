@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LoginPage } from "@/components/gj/LoginPage";
-import { DEMO_CREDENTIALS } from "@/lib/gj/data";
 
 export const Route = createFileRoute("/login/admin")({
   head: () => ({
@@ -16,8 +15,6 @@ export const Route = createFileRoute("/login/admin")({
       role="admin"
       title="The Competition Command Centre."
       blurb="Manage people, monitor integrity, audit the process and release results."
-      demoEmail={DEMO_CREDENTIALS.admin.email}
-      demoPassword={DEMO_CREDENTIALS.admin.password}
       footer={<span className="text-muted-foreground">Administrator accounts are provisioned securely and are not self-service.</span>}
     />
   ),

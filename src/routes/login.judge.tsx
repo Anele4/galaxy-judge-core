@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LoginPage } from "@/components/gj/LoginPage";
-import { DEMO_CREDENTIALS } from "@/lib/gj/data";
 
 export const Route = createFileRoute("/login/judge")({
   head: () => ({
@@ -16,8 +15,6 @@ export const Route = createFileRoute("/login/judge")({
       role="judge"
       title="Independent evaluation, protected end to end."
       blurb="Judge accounts are created by the administrator to protect competition integrity."
-      demoEmail={DEMO_CREDENTIALS.judge.email}
-      demoPassword={DEMO_CREDENTIALS.judge.password}
       footer={<span className="text-muted-foreground">Judges cannot self-register. Contact the competition administrator for access.</span>}
     />
   ),
