@@ -149,10 +149,10 @@ function Gate({ title, body, action }: { title: string; body: string; action: Re
   return (
     <div className="flex min-h-screen items-center justify-center px-4">
       <Card className="max-w-md p-8 text-center">
-        <p className="text-3xl" aria-hidden>
-          🔒
-        </p>
-        <h1 className="mt-3 text-2xl font-bold">{title}</h1>
+        <span className="mx-auto grid h-11 w-11 place-items-center rounded-xl bg-secondary text-muted-foreground">
+          <Lock className="h-5 w-5" aria-hidden />
+        </span>
+        <h1 className="mt-4 text-xl font-semibold">{title}</h1>
         <p className="mt-2 text-sm text-muted-foreground">{body}</p>
         <div className="mt-6 flex justify-center">{action}</div>
       </Card>
