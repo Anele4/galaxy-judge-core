@@ -1,4 +1,17 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
+import {
+  BarChart3,
+  Gavel,
+  Layers,
+  Lightbulb,
+  Link2,
+  Megaphone,
+  Radar,
+  ScrollText,
+  ShieldCheck,
+  Trophy,
+  Wrench,
+} from "lucide-react";
 import { Shell, type NavItem } from "@/components/gj/Shell";
 
 export const Route = createFileRoute("/admin")({
@@ -6,17 +19,17 @@ export const Route = createFileRoute("/admin")({
 });
 
 const NAV: NavItem[] = [
-  { to: "/admin", label: "Command", icon: "🛰️" },
-  { to: "/admin/competitors", label: "Competitors", icon: "🚀" },
-  { to: "/admin/judges", label: "Judges", icon: "⚖️" },
-  { to: "/admin/assignments", label: "Assign", icon: "🔗" },
-  { to: "/admin/monitor", label: "Monitor", icon: "📊" },
-  { to: "/admin/integrity", label: "Integrity Centre", icon: "🔐" },
-  { to: "/admin/corrections", label: "Corrections", icon: "🛠" },
-  { to: "/admin/audit", label: "Audit replay", icon: "🧾" },
-  { to: "/admin/results", label: "Results", icon: "🏆" },
-  { to: "/admin/intelligence", label: "Intelligence", icon: "💡" },
-  { to: "/admin/announcements", label: "Announcements", icon: "📣" },
+  { to: "/admin", label: "Command", icon: Radar },
+  { to: "/admin/competitors", label: "Competitors", icon: Layers },
+  { to: "/admin/judges", label: "Judges", icon: Gavel },
+  { to: "/admin/assignments", label: "Assign", icon: Link2 },
+  { to: "/admin/monitor", label: "Monitor", icon: BarChart3 },
+  { to: "/admin/integrity", label: "Integrity Centre", icon: ShieldCheck },
+  { to: "/admin/corrections", label: "Corrections", icon: Wrench },
+  { to: "/admin/audit", label: "Audit replay", icon: ScrollText },
+  { to: "/admin/results", label: "Results", icon: Trophy },
+  { to: "/admin/intelligence", label: "Intelligence", icon: Lightbulb },
+  { to: "/admin/announcements", label: "Announcements", icon: Megaphone },
 ];
 
 function AdminLayout() {
