@@ -10,7 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CompetitorRouteImport } from './routes/competitor'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as CompetitorIndexRouteImport } from './routes/competitor.index'
+import { Route as CompetitorApplicationRouteImport } from './routes/competitor.application'
+import { Route as CompetitorDocumentsRouteImport } from './routes/competitor.documents'
+import { Route as CompetitorProfileRouteImport } from './routes/competitor.profile'
+import { Route as CompetitorUpdatesRouteImport } from './routes/competitor.updates'
 import { Route as LoginAdminRouteImport } from './routes/login.admin'
 import { Route as LoginCompetitorRouteImport } from './routes/login.competitor'
 import { Route as LoginJudgeRouteImport } from './routes/login.judge'
@@ -20,10 +26,40 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CompetitorRoute = CompetitorRouteImport.update({
+  id: '/competitor',
+  path: '/competitor',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
   getParentRoute: () => rootRouteImport,
+} as any)
+const CompetitorIndexRoute = CompetitorIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CompetitorRoute,
+} as any)
+const CompetitorApplicationRoute = CompetitorApplicationRouteImport.update({
+  id: '/application',
+  path: '/application',
+  getParentRoute: () => CompetitorRoute,
+} as any)
+const CompetitorDocumentsRoute = CompetitorDocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => CompetitorRoute,
+} as any)
+const CompetitorProfileRoute = CompetitorProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => CompetitorRoute,
+} as any)
+const CompetitorUpdatesRoute = CompetitorUpdatesRouteImport.update({
+  id: '/updates',
+  path: '/updates',
+  getParentRoute: () => CompetitorRoute,
 } as any)
 const LoginAdminRoute = LoginAdminRouteImport.update({
   id: '/login/admin',
@@ -43,43 +79,87 @@ const LoginJudgeRoute = LoginJudgeRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/competitor': typeof CompetitorRouteWithChildren
   '/register': typeof RegisterRoute
+  '/competitor/application': typeof CompetitorApplicationRoute
+  '/competitor/documents': typeof CompetitorDocumentsRoute
+  '/competitor/profile': typeof CompetitorProfileRoute
+  '/competitor/updates': typeof CompetitorUpdatesRoute
   '/login/admin': typeof LoginAdminRoute
   '/login/competitor': typeof LoginCompetitorRoute
   '/login/judge': typeof LoginJudgeRoute
+  '/competitor/': typeof CompetitorIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/register': typeof RegisterRoute
+  '/competitor/application': typeof CompetitorApplicationRoute
+  '/competitor/documents': typeof CompetitorDocumentsRoute
+  '/competitor/profile': typeof CompetitorProfileRoute
+  '/competitor/updates': typeof CompetitorUpdatesRoute
   '/login/admin': typeof LoginAdminRoute
   '/login/competitor': typeof LoginCompetitorRoute
   '/login/judge': typeof LoginJudgeRoute
+  '/competitor': typeof CompetitorIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/competitor': typeof CompetitorRouteWithChildren
   '/register': typeof RegisterRoute
+  '/competitor/application': typeof CompetitorApplicationRoute
+  '/competitor/documents': typeof CompetitorDocumentsRoute
+  '/competitor/profile': typeof CompetitorProfileRoute
+  '/competitor/updates': typeof CompetitorUpdatesRoute
   '/login/admin': typeof LoginAdminRoute
   '/login/competitor': typeof LoginCompetitorRoute
   '/login/judge': typeof LoginJudgeRoute
+  '/competitor/': typeof CompetitorIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/register' | '/login/admin' | '/login/competitor' | '/login/judge'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/register' | '/login/admin' | '/login/competitor' | '/login/judge'
-  id:
-    | '__root__'
     | '/'
+    | '/competitor'
     | '/register'
+    | '/competitor/application'
+    | '/competitor/documents'
+    | '/competitor/profile'
+    | '/competitor/updates'
     | '/login/admin'
     | '/login/competitor'
     | '/login/judge'
+    | '/competitor/'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/register'
+    | '/competitor/application'
+    | '/competitor/documents'
+    | '/competitor/profile'
+    | '/competitor/updates'
+    | '/login/admin'
+    | '/login/competitor'
+    | '/login/judge'
+    | '/competitor'
+  id:
+    | '__root__'
+    | '/'
+    | '/competitor'
+    | '/register'
+    | '/competitor/application'
+    | '/competitor/documents'
+    | '/competitor/profile'
+    | '/competitor/updates'
+    | '/login/admin'
+    | '/login/competitor'
+    | '/login/judge'
+    | '/competitor/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CompetitorRoute: typeof CompetitorRouteWithChildren
   RegisterRoute: typeof RegisterRoute
   LoginAdminRoute: typeof LoginAdminRoute
   LoginCompetitorRoute: typeof LoginCompetitorRoute
@@ -95,12 +175,54 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/competitor': {
+      id: '/competitor'
+      path: '/competitor'
+      fullPath: '/competitor'
+      preLoaderRoute: typeof CompetitorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/register': {
       id: '/register'
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof RegisterRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/competitor/': {
+      id: '/competitor/'
+      path: '/'
+      fullPath: '/competitor/'
+      preLoaderRoute: typeof CompetitorIndexRouteImport
+      parentRoute: typeof CompetitorRoute
+    }
+    '/competitor/application': {
+      id: '/competitor/application'
+      path: '/application'
+      fullPath: '/competitor/application'
+      preLoaderRoute: typeof CompetitorApplicationRouteImport
+      parentRoute: typeof CompetitorRoute
+    }
+    '/competitor/documents': {
+      id: '/competitor/documents'
+      path: '/documents'
+      fullPath: '/competitor/documents'
+      preLoaderRoute: typeof CompetitorDocumentsRouteImport
+      parentRoute: typeof CompetitorRoute
+    }
+    '/competitor/profile': {
+      id: '/competitor/profile'
+      path: '/profile'
+      fullPath: '/competitor/profile'
+      preLoaderRoute: typeof CompetitorProfileRouteImport
+      parentRoute: typeof CompetitorRoute
+    }
+    '/competitor/updates': {
+      id: '/competitor/updates'
+      path: '/updates'
+      fullPath: '/competitor/updates'
+      preLoaderRoute: typeof CompetitorUpdatesRouteImport
+      parentRoute: typeof CompetitorRoute
     }
     '/login/admin': {
       id: '/login/admin'
@@ -126,8 +248,29 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface CompetitorRouteChildren {
+  CompetitorApplicationRoute: typeof CompetitorApplicationRoute
+  CompetitorDocumentsRoute: typeof CompetitorDocumentsRoute
+  CompetitorProfileRoute: typeof CompetitorProfileRoute
+  CompetitorUpdatesRoute: typeof CompetitorUpdatesRoute
+  CompetitorIndexRoute: typeof CompetitorIndexRoute
+}
+
+const CompetitorRouteChildren: CompetitorRouteChildren = {
+  CompetitorApplicationRoute: CompetitorApplicationRoute,
+  CompetitorDocumentsRoute: CompetitorDocumentsRoute,
+  CompetitorProfileRoute: CompetitorProfileRoute,
+  CompetitorUpdatesRoute: CompetitorUpdatesRoute,
+  CompetitorIndexRoute: CompetitorIndexRoute,
+}
+
+const CompetitorRouteWithChildren = CompetitorRoute._addFileChildren(
+  CompetitorRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CompetitorRoute: CompetitorRouteWithChildren,
   RegisterRoute: RegisterRoute,
   LoginAdminRoute: LoginAdminRoute,
   LoginCompetitorRoute: LoginCompetitorRoute,
