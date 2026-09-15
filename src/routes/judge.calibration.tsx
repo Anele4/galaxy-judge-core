@@ -10,7 +10,7 @@ export const Route = createFileRoute("/judge/calibration")({
 
 /** A fictional sample project used purely for rubric familiarisation. */
 const SAMPLE = {
-  name: "AquaSense Demo",
+  name: "Calibration Sample Project",
   problem: "A fictional sample: rural boreholes fail without warning.",
   evidence: [
     "Sample document — sensor design overview and cost per unit.",

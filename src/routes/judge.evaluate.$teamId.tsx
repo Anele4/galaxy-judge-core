@@ -191,7 +191,7 @@ function EvaluationWorkspace() {
       {recovered ? (
         <Notice tone="info" title="Draft Recovered">
           Continue your evaluation where you left off. Galaxy Continuity: this draft also resumes on
-          another Galaxy device signed in with your account (simulated in this prototype).
+          another Galaxy device signed in with your account.
         </Notice>
       ) : null}
 

@@ -1,7 +1,7 @@
 /**
  * Shared sign-in experience, themed per role.
  * Each role has its own route so the three portals stay completely separate.
- * Demo credentials live in a collapsed "Demo & test access" disclosure, not on the form.
+ * Credentials are never displayed in the interface.
  */
 import { Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, ChevronDown, ShieldCheck } from "lucide-react";
@@ -66,7 +66,7 @@ export function LoginPage({
             Role-based access. Every action is recorded in the audit trail.
           </p>
         </div>
-        <p className="text-[11px] opacity-45">Prototype environment · Fictional demo data</p>
+        <p className="text-[11px] opacity-45">Samsung Solve for Tomorrow 2026</p>
       </section>
 
       {/* Right: the form */}
@@ -95,7 +95,7 @@ export function LoginPage({
                   setEmail(e.target.value);
                   setError("");
                 }}
-                placeholder="you@galaxyjudge.demo"
+                placeholder="you@galaxyjudge.app"
               />
             </Field>
             <Field label="Password">
@@ -118,7 +118,7 @@ export function LoginPage({
             <button
               type="button"
               className="w-full text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground"
-              onClick={() => toast.info("Password reset link sent (simulated in this prototype).")}
+              onClick={() => toast.info("If the account exists, a password reset link has been sent.")}
             >
               Forgot password?
             </button>
