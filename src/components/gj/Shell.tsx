@@ -4,7 +4,7 @@
  * Also enforces role-based route protection (Access Restricted screen).
  */
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import { Lock, type LucideIcon } from "lucide-react";
+import { Lock as LockIcon, type LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
 import { useGJ } from "@/lib/gj/store";
 import type { Role } from "@/lib/gj/types";
@@ -150,7 +150,7 @@ function Gate({ title, body, action }: { title: string; body: string; action: Re
     <div className="flex min-h-screen items-center justify-center px-4">
       <Card className="max-w-md p-8 text-center">
         <span className="mx-auto grid h-11 w-11 place-items-center rounded-xl bg-secondary text-muted-foreground">
-          <Lock className="h-5 w-5" aria-hidden />
+          <LockIcon className="h-5 w-5" aria-hidden />
         </span>
         <h1 className="mt-4 text-xl font-semibold">{title}</h1>
         <p className="mt-2 text-sm text-muted-foreground">{body}</p>
