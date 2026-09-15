@@ -13,7 +13,7 @@ export interface Account {
   email: string;
   password: string; // prototype only — never store plaintext passwords in production
   active: boolean;
-  linkedId?: string; // teamId for competitors, judgeId for judges
+  linkedId?: string | undefined; // teamId for competitors, judgeId for judges
 }
 
 export type TeamStatus =
@@ -79,7 +79,7 @@ export interface Team {
   application: Application;
   documents: UploadedDoc[];
   evidence: EvidenceItem[];
-  submittedAt?: string;
+  submittedAt?: string | undefined;
   phase: 1 | 2 | 3 | 4;
 }
 
@@ -111,8 +111,8 @@ export interface Evaluation {
   notes: Record<string, string>;
   status: "not_started" | "draft" | "locked";
   updatedAt: string;
-  submittedAt?: string;
-  total?: number; // weighted 0-100
+  submittedAt?: string | undefined;
+  total?: number | undefined; // weighted 0-100
 }
 
 export interface CorrectionRequest {
@@ -125,7 +125,7 @@ export interface CorrectionRequest {
   reason: string;
   status: "pending" | "approved" | "rejected";
   createdAt: string;
-  resolvedAt?: string;
+  resolvedAt?: string | undefined;
 }
 
 export interface Announcement {
@@ -142,7 +142,7 @@ export interface AuditEvent {
   actor: string;
   role: Role | "system";
   action: string;
-  target?: string;
+  target?: string | undefined;
 }
 
 export interface CompetitionState {

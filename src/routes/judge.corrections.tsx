@@ -24,8 +24,14 @@ function Corrections() {
 
   function submit() {
     if (!judge) return;
-    if (!teamId) return toast.error("Select a locked evaluation.");
-    if (reason.trim().length < 15) return toast.error("Please give a reason of at least 15 characters.");
+    if (!teamId) {
+      toast.error("Select a locked evaluation.");
+      return;
+    }
+    if (reason.trim().length < 15) {
+      toast.error("Please give a reason of at least 15 characters.");
+      return;
+    }
     update(
       (d) => {
         d.corrections.push({

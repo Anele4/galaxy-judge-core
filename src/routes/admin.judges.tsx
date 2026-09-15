@@ -17,7 +17,8 @@ function JudgeAdmin() {
 
   function addJudge() {
     if (!draft.name.trim() || !/^\S+@\S+\.\S+$/.test(draft.email)) {
-      return toast.error("A name and valid email are required.");
+      toast.error("A name and valid email are required.");
+      return;
     }
     const id = `J-${String(data.judges.length + 1).padStart(2, "0")}`;
     const judge: Judge = {

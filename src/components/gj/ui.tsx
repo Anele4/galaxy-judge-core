@@ -45,7 +45,7 @@ export function Badge({ children, tone = "neutral" }: { children: ReactNode; ton
   return <span className={cn("gj-badge", `gj-badge-${tone}`)}>{children}</span>;
 }
 
-export function Progress({ value, label }: { value: number; label?: string }) {
+export function Progress({ value, label }: { value: number; label?: string | undefined }) {
   const v = Math.max(0, Math.min(100, value));
   return (
     <div>
@@ -77,8 +77,8 @@ export function Field({
   children,
 }: {
   label: string;
-  error?: string;
-  hint?: string;
+  error?: string | undefined;
+  hint?: string | undefined;
   children: ReactNode;
 }) {
   return (

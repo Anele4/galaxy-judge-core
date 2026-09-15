@@ -31,7 +31,10 @@ function Assignments() {
     const target = data.judges.find(
       (j) => j.active && j.id !== fromJudge && !j.assigned.includes(teamId) && !j.conflicts.includes(teamId),
     );
-    if (!target) return toast.error("No eligible judge available for reassignment.");
+    if (!target) {
+      toast.error("No eligible judge available for reassignment.");
+      return;
+    }
     update(
       (d) => {
         const from = d.judges.find((j) => j.id === fromJudge);

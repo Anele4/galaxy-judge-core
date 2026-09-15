@@ -23,7 +23,10 @@ function CompetitorAdmin() {
   const actor = session?.name ?? "Administrator";
 
   function addTeam() {
-    if (!draft.teamName.trim() || !draft.name.trim()) return toast.error("Team name and project title are required.");
+    if (!draft.teamName.trim() || !draft.name.trim()) {
+      toast.error("Team name and project title are required.");
+      return;
+    }
     const id = `SFT-${String(data.teams.length + 1).padStart(2, "0")}`;
     const team: Team = {
       id, code: id, name: draft.name, teamName: draft.teamName, school: draft.school,
@@ -43,7 +46,7 @@ function CompetitorAdmin() {
         const t = d.teams.find((x) => x.id === id);
         if (!t) return;
         t.status = status;
-        t.phase = status === "Finalist" || status === "Winner" ? 4 : status === "Phase 3" ? 3 : status === "Phase 2" ? 4 - 2 : 1;
+        t.phase = status === "Finalist" || status === "Winner" ? 4 : status === "Phase 3" ? 3 : status === "Phase 2" ? 2 : 1;
       },
       { actor, role: "admin", action: `Status updated to ${status}`, target: id },
     );
