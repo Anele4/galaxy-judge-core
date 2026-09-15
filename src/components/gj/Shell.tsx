@@ -135,9 +135,7 @@ export function Shell({
                 pathname === item.to ? "text-primary" : "text-muted-foreground"
               }`}
             >
-              <span className="text-lg" aria-hidden>
-                {item.icon}
-              </span>
+              <item.icon aria-hidden className="h-5 w-5" />
               {item.label}
             </Link>
           ))}
