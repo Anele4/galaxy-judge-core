@@ -21,15 +21,11 @@ export function LoginPage({
   role,
   title,
   blurb,
-  demoEmail,
-  demoPassword,
   footer,
 }: {
   role: Role;
   title: string;
   blurb: string;
-  demoEmail: string;
-  demoPassword: string;
   footer?: React.ReactNode;
 }) {
   const { login } = useGJ();
