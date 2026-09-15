@@ -4,6 +4,7 @@
  * Also enforces role-based route protection (Access Restricted screen).
  */
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
+import { Lock as LockIcon, type LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
 import { useGJ } from "@/lib/gj/store";
 import type { Role } from "@/lib/gj/types";
@@ -12,7 +13,7 @@ import { Button, Card } from "./ui";
 export interface NavItem {
   to: string;
   label: string;
-  icon: string;
+  icon: LucideIcon;
 }
 
 const LOGIN_ROUTE: Record<Role, string> = {
@@ -84,7 +85,11 @@ export function Shell({
                 className="gj-badge gj-badge-neutral"
                 title="Simulate connectivity for offline judging"
               >
-                {online ? "🟢 Online" : "🔴 Offline"}
+                <span
+                  aria-hidden
+                  className={`mr-1.5 inline-block h-2 w-2 rounded-full ${online ? "bg-emerald-500" : "bg-red-500"}`}
+                />
+                {online ? "Online" : "Offline"}
               </button>
             ) : null}
             <span className="hidden text-sm font-semibold sm:block">{session.name}</span>
@@ -110,7 +115,7 @@ export function Shell({
                 to={item.to}
                 className={`gj-nav-link ${pathname === item.to ? "gj-nav-active" : ""}`}
               >
-                <span aria-hidden>{item.icon}</span>
+                <item.icon aria-hidden className="h-4 w-4" />
                 {item.label}
               </Link>
             ))}
@@ -130,9 +135,7 @@ export function Shell({
                 pathname === item.to ? "text-primary" : "text-muted-foreground"
               }`}
             >
-              <span className="text-lg" aria-hidden>
-                {item.icon}
-              </span>
+              <item.icon aria-hidden className="h-5 w-5" />
               {item.label}
             </Link>
           ))}
@@ -146,10 +149,10 @@ function Gate({ title, body, action }: { title: string; body: string; action: Re
   return (
     <div className="flex min-h-screen items-center justify-center px-4">
       <Card className="max-w-md p-8 text-center">
-        <p className="text-3xl" aria-hidden>
-          🔒
-        </p>
-        <h1 className="mt-3 text-2xl font-bold">{title}</h1>
+        <span className="mx-auto grid h-11 w-11 place-items-center rounded-xl bg-secondary text-muted-foreground">
+          <LockIcon className="h-5 w-5" aria-hidden />
+        </span>
+        <h1 className="mt-4 text-xl font-semibold">{title}</h1>
         <p className="mt-2 text-sm text-muted-foreground">{body}</p>
         <div className="mt-6 flex justify-center">{action}</div>
       </Card>

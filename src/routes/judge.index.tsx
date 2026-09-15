@@ -25,11 +25,11 @@ function JudgeHome() {
   return (
     <div className="space-y-6">
       <Card className="gj-hero p-6 sm:p-8">
-        <p className="text-sm opacity-80">{data.competition.name}</p>
-        <h1 className="mt-1 text-2xl font-black sm:text-3xl">{judge.name}</h1>
-        <p className="mt-2 opacity-85">{judge.expertise} · {judge.organisation}</p>
-        <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-primary-foreground/15 px-4 py-1.5 text-sm font-semibold">
-          🔒 Independent Evaluation Active
+        <p className="text-[11px] font-bold uppercase tracking-[0.14em] opacity-55">{data.competition.name}</p>
+        <h1 className="mt-1 text-[1.6rem] font-semibold tracking-tight sm:text-3xl">{judge.name}</h1>
+        <p className="mt-2 text-sm opacity-70">{judge.expertise} · {judge.organisation}</p>
+        <div className="mt-5 inline-flex items-center gap-2 rounded-lg bg-white/10 px-3.5 py-1.5 text-[13px] font-semibold ring-1 ring-white/15">
+          Independent evaluation active
         </div>
       </Card>
 

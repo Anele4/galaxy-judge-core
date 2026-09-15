@@ -1,13 +1,15 @@
 /**
- * Shared premium login experience, themed per role.
+ * Shared sign-in experience, themed per role.
  * Each role has its own route so the three portals stay completely separate.
+ * Demo credentials live in a collapsed "Demo & test access" disclosure, not on the form.
  */
 import { Link, useNavigate } from "@tanstack/react-router";
+import { ArrowLeft, ChevronDown, ShieldCheck } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useGJ } from "@/lib/gj/store";
 import type { Role } from "@/lib/gj/types";
-import { Button, Card, Field, Notice } from "./ui";
+import { Button, Field, Notice } from "./ui";
 
 const DEST = {
   competitor: "/competitor",
@@ -48,36 +50,45 @@ export function LoginPage({
   }
 
   return (
-    <div className="grid min-h-screen lg:grid-cols-2">
-      <section className="gj-hero relative hidden flex-col justify-between p-12 lg:flex">
-        <Link to="/" className="flex items-center gap-3">
-          <span className="grid h-10 w-10 place-items-center rounded-xl bg-primary-foreground text-sm font-black text-primary">
+    <div className="grid min-h-screen lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+      {/* Left: quiet charcoal context panel — no gradients, no marketing hero */}
+      <section className="gj-ink relative hidden flex-col justify-between p-12 lg:flex">
+        <Link to="/" className="flex items-center gap-2.5">
+          <span className="grid h-8 w-8 place-items-center rounded-lg bg-primary text-[11px] font-bold text-primary-foreground">
             GJ
           </span>
-          <span className="text-lg font-bold">Galaxy Judge</span>
+          <span className="text-[15px] font-semibold tracking-tight">Galaxy Judge</span>
         </Link>
-        <div>
-          <h1 className="max-w-md text-4xl font-black leading-tight">{title}</h1>
-          <p className="mt-4 max-w-md text-base opacity-85">{blurb}</p>
-          <p className="mt-10 text-sm font-semibold opacity-80">
-            Judge independently. Decide intelligently. Prove fairness.
+        <div className="max-w-sm">
+          <p className="text-[11px] font-bold uppercase tracking-[0.14em] opacity-55">
+            Samsung Solve for Tomorrow 2026
+          </p>
+          <h1 className="mt-4 text-3xl font-semibold leading-tight">{title}</h1>
+          <p className="mt-4 text-sm leading-relaxed opacity-70">{blurb}</p>
+          <p className="mt-10 flex items-center gap-2 text-xs opacity-60">
+            <ShieldCheck className="h-4 w-4" aria-hidden />
+            Role-based access. Every action is recorded in the audit trail.
           </p>
         </div>
-        <p className="text-xs opacity-70">Samsung Solve for Tomorrow 2026 — prototype environment</p>
+        <p className="text-[11px] opacity-45">Prototype environment · Fictional demo data</p>
       </section>
 
-      <section className="flex items-center justify-center px-4 py-12">
-        <div className="w-full max-w-md">
-          <Link to="/" className="mb-8 inline-flex items-center gap-2 lg:hidden">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-primary text-sm font-black text-primary-foreground">
-              GJ
-            </span>
-            <span className="font-bold">Galaxy Judge</span>
+      {/* Right: the form */}
+      <section className="flex items-center justify-center bg-card px-5 py-12">
+        <div className="w-full max-w-sm">
+          <Link
+            to="/"
+            className="mb-8 inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" aria-hidden />
+            All portals
           </Link>
-          <h2 className="text-2xl font-bold capitalize">{role} sign in</h2>
-          <p className="mt-1 text-sm text-muted-foreground">{blurb}</p>
 
-          <form onSubmit={submit} className="mt-7 space-y-4" noValidate>
+          <p className="gj-eyebrow">{role} portal</p>
+          <h2 className="mt-2 text-2xl font-semibold">Sign in</h2>
+          <p className="mt-1.5 text-sm text-muted-foreground">{blurb}</p>
+
+          <form onSubmit={submit} className="mt-8 space-y-4" noValidate>
             <Field label="Email">
               <input
                 className="gj-input"
@@ -110,36 +121,38 @@ export function LoginPage({
             </Button>
             <button
               type="button"
-              className="w-full text-sm font-semibold text-primary"
-              onClick={() =>
-                toast.info("Password reset link sent (simulated in this prototype).")
-              }
+              className="w-full text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground"
+              onClick={() => toast.info("Password reset link sent (simulated in this prototype).")}
             >
               Forgot password?
             </button>
           </form>
 
-          <Card className="mt-8 p-5">
-            <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
-              Demo access
-            </p>
-            <p className="mt-2 text-sm">
-              {demoEmail}
-              <br />
-              <span className="text-muted-foreground">{demoPassword}</span>
-            </p>
-            <Button
-              variant="outline"
-              className="mt-3 w-full"
-              onClick={() => {
-                setEmail(demoEmail);
-                setPassword(demoPassword);
-                setError("");
-              }}
-            >
-              Use demo account
-            </Button>
-          </Card>
+          <details className="group mt-8 rounded-xl border border-border">
+            <summary className="flex cursor-pointer list-none items-center gap-2 px-4 py-3 text-xs font-semibold text-muted-foreground">
+              <ChevronDown
+                className="h-3.5 w-3.5 transition-transform group-open:rotate-180"
+                aria-hidden
+              />
+              Demo &amp; test access
+            </summary>
+            <div className="gj-rule px-4 py-3.5">
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                Evaluation environment only. Fills the form with the {role} test account.
+              </p>
+              <Button
+                variant="outline"
+                className="mt-3 w-full"
+                onClick={() => {
+                  setEmail(demoEmail);
+                  setPassword(demoPassword);
+                  setError("");
+                }}
+              >
+                Use demo account
+              </Button>
+            </div>
+          </details>
 
           {footer ? <div className="mt-6 text-center text-sm">{footer}</div> : null}
         </div>

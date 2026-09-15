@@ -122,7 +122,7 @@ const JUDGE_NAMES = [
 ];
 
 const STATUSES: TeamStatus[] = [
-  "Finalist", "Top 20", "Phase 3", "Phase 2", "Top 20", "Under Review", "Finalist", "Phase 3",
+  "Submitted", "Top 20", "Phase 3", "Phase 2", "Top 20", "Under Review", "Finalist", "Phase 3",
   "Top 20", "Under Review", "Phase 2", "Submitted", "Top 20", "Phase 3", "Finalist", "Phase 2",
   "Top 20", "Submitted", "Under Review", "Draft",
 ];

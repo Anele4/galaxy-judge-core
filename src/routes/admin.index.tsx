@@ -29,9 +29,9 @@ function CommandCentre() {
   return (
     <div className="space-y-6">
       <Card className="gj-hero p-6 sm:p-8">
-        <p className="text-sm opacity-80">{data.competition.name}</p>
-        <h1 className="mt-1 text-2xl font-black sm:text-3xl">Competition Command Centre</h1>
-        <p className="mt-2 opacity-85">Phase {data.competition.phase} · {data.competition.judgingClosed ? "Judging closed" : "Judging active"}</p>
+        <p className="text-[11px] font-bold uppercase tracking-[0.14em] opacity-55">{data.competition.name}</p>
+        <h1 className="mt-1 text-[1.6rem] font-semibold tracking-tight sm:text-3xl">Competition Command Centre</h1>
+        <p className="mt-2 text-sm opacity-70">Phase {data.competition.phase} · {data.competition.judgingClosed ? "Judging closed" : "Judging active"}</p>
       </Card>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -54,7 +54,7 @@ function CommandCentre() {
         <Notice tone="warning" title="Attention required">
           {conflicts.map((c) => (
             <p key={`${c.judge.id}-${c.team}`}>
-              ⚠ {c.judge.name} has declared a conflict with Team {c.team}.
+              {c.judge.name} has declared a conflict with Team {c.team}.
             </p>
           ))}
           <Link to="/admin/assignments" className="mt-3 inline-block font-semibold underline">

@@ -25,7 +25,10 @@ function Announcements() {
   const [phase, setPhase] = useState<1 | 2 | 3 | 4>(data.competition.phase);
 
   function publish() {
-    if (!title.trim() || !body.trim()) return toast.error("Title and message are required.");
+    if (!title.trim() || !body.trim()) {
+      toast.error("Title and message are required.");
+      return;
+    }
     update(
       (d) => {
         d.announcements.push({

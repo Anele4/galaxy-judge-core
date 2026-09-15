@@ -1,4 +1,5 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { ClipboardList, Home, Target, Wrench } from "lucide-react";
 import { Shell, type NavItem } from "@/components/gj/Shell";
 
 export const Route = createFileRoute("/judge")({
@@ -6,10 +7,10 @@ export const Route = createFileRoute("/judge")({
 });
 
 const NAV: NavItem[] = [
-  { to: "/judge", label: "My judging", icon: "🏠" },
-  { to: "/judge/teams", label: "Teams", icon: "📋" },
-  { to: "/judge/calibration", label: "Calibration", icon: "🎯" },
-  { to: "/judge/corrections", label: "Corrections", icon: "🛠" },
+  { to: "/judge", label: "My judging", icon: Home },
+  { to: "/judge/teams", label: "Teams", icon: ClipboardList },
+  { to: "/judge/calibration", label: "Calibration", icon: Target },
+  { to: "/judge/corrections", label: "Corrections", icon: Wrench },
 ];
 
 function JudgeLayout() {
