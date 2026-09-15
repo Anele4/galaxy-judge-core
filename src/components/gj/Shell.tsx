@@ -85,7 +85,11 @@ export function Shell({
                 className="gj-badge gj-badge-neutral"
                 title="Simulate connectivity for offline judging"
               >
-                {online ? "🟢 Online" : "🔴 Offline"}
+                <span
+                  aria-hidden
+                  className={`mr-1.5 inline-block h-2 w-2 rounded-full ${online ? "bg-emerald-500" : "bg-red-500"}`}
+                />
+                {online ? "Online" : "Offline"}
               </button>
             ) : null}
             <span className="hidden text-sm font-semibold sm:block">{session.name}</span>
