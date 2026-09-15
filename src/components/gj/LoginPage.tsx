@@ -124,33 +124,7 @@ export function LoginPage({
             </button>
           </form>
 
-          <details className="group mt-8 rounded-xl border border-border">
-            <summary className="flex cursor-pointer list-none items-center gap-2 px-4 py-3 text-xs font-semibold text-muted-foreground">
-              <ChevronDown
-                className="h-3.5 w-3.5 transition-transform group-open:rotate-180"
-                aria-hidden
-              />
-              Demo &amp; test access
-            </summary>
-            <div className="gj-rule px-4 py-3.5">
-              <p className="text-xs leading-relaxed text-muted-foreground">
-                Evaluation environment only. Fills the form with the {role} test account.
-              </p>
-              <Button
-                variant="outline"
-                className="mt-3 w-full"
-                onClick={() => {
-                  setEmail(demoEmail);
-                  setPassword(demoPassword);
-                  setError("");
-                }}
-              >
-                Use demo account
-              </Button>
-            </div>
-          </details>
-
-          {footer ? <div className="mt-6 text-center text-sm">{footer}</div> : null}
+          {footer ? <div className="mt-8 text-center text-sm">{footer}</div> : null}
         </div>
       </section>
     </div>
