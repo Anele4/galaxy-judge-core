@@ -11,12 +11,16 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CompetitorRouteImport } from './routes/competitor'
+import { Route as JudgeRouteImport } from './routes/judge'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as CompetitorIndexRouteImport } from './routes/competitor.index'
 import { Route as CompetitorApplicationRouteImport } from './routes/competitor.application'
 import { Route as CompetitorDocumentsRouteImport } from './routes/competitor.documents'
 import { Route as CompetitorProfileRouteImport } from './routes/competitor.profile'
 import { Route as CompetitorUpdatesRouteImport } from './routes/competitor.updates'
+import { Route as JudgeIndexRouteImport } from './routes/judge.index'
+import { Route as JudgeCalibrationRouteImport } from './routes/judge.calibration'
+import { Route as JudgeTeamsRouteImport } from './routes/judge.teams'
 import { Route as LoginAdminRouteImport } from './routes/login.admin'
 import { Route as LoginCompetitorRouteImport } from './routes/login.competitor'
 import { Route as LoginJudgeRouteImport } from './routes/login.judge'
@@ -29,6 +33,11 @@ const IndexRoute = IndexRouteImport.update({
 const CompetitorRoute = CompetitorRouteImport.update({
   id: '/competitor',
   path: '/competitor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JudgeRoute = JudgeRouteImport.update({
+  id: '/judge',
+  path: '/judge',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RegisterRoute = RegisterRouteImport.update({
@@ -61,6 +70,21 @@ const CompetitorUpdatesRoute = CompetitorUpdatesRouteImport.update({
   path: '/updates',
   getParentRoute: () => CompetitorRoute,
 } as any)
+const JudgeIndexRoute = JudgeIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => JudgeRoute,
+} as any)
+const JudgeCalibrationRoute = JudgeCalibrationRouteImport.update({
+  id: '/calibration',
+  path: '/calibration',
+  getParentRoute: () => JudgeRoute,
+} as any)
+const JudgeTeamsRoute = JudgeTeamsRouteImport.update({
+  id: '/teams',
+  path: '/teams',
+  getParentRoute: () => JudgeRoute,
+} as any)
 const LoginAdminRoute = LoginAdminRouteImport.update({
   id: '/login/admin',
   path: '/login/admin',
@@ -80,15 +104,19 @@ const LoginJudgeRoute = LoginJudgeRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/competitor': typeof CompetitorRouteWithChildren
+  '/judge': typeof JudgeRouteWithChildren
   '/register': typeof RegisterRoute
   '/competitor/application': typeof CompetitorApplicationRoute
   '/competitor/documents': typeof CompetitorDocumentsRoute
   '/competitor/profile': typeof CompetitorProfileRoute
   '/competitor/updates': typeof CompetitorUpdatesRoute
+  '/judge/calibration': typeof JudgeCalibrationRoute
+  '/judge/teams': typeof JudgeTeamsRoute
   '/login/admin': typeof LoginAdminRoute
   '/login/competitor': typeof LoginCompetitorRoute
   '/login/judge': typeof LoginJudgeRoute
   '/competitor/': typeof CompetitorIndexRoute
+  '/judge/': typeof JudgeIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -97,39 +125,50 @@ export interface FileRoutesByTo {
   '/competitor/documents': typeof CompetitorDocumentsRoute
   '/competitor/profile': typeof CompetitorProfileRoute
   '/competitor/updates': typeof CompetitorUpdatesRoute
+  '/judge/calibration': typeof JudgeCalibrationRoute
+  '/judge/teams': typeof JudgeTeamsRoute
   '/login/admin': typeof LoginAdminRoute
   '/login/competitor': typeof LoginCompetitorRoute
   '/login/judge': typeof LoginJudgeRoute
   '/competitor': typeof CompetitorIndexRoute
+  '/judge': typeof JudgeIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/competitor': typeof CompetitorRouteWithChildren
+  '/judge': typeof JudgeRouteWithChildren
   '/register': typeof RegisterRoute
   '/competitor/application': typeof CompetitorApplicationRoute
   '/competitor/documents': typeof CompetitorDocumentsRoute
   '/competitor/profile': typeof CompetitorProfileRoute
   '/competitor/updates': typeof CompetitorUpdatesRoute
+  '/judge/calibration': typeof JudgeCalibrationRoute
+  '/judge/teams': typeof JudgeTeamsRoute
   '/login/admin': typeof LoginAdminRoute
   '/login/competitor': typeof LoginCompetitorRoute
   '/login/judge': typeof LoginJudgeRoute
   '/competitor/': typeof CompetitorIndexRoute
+  '/judge/': typeof JudgeIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/competitor'
+    | '/judge'
     | '/register'
     | '/competitor/application'
     | '/competitor/documents'
     | '/competitor/profile'
     | '/competitor/updates'
+    | '/judge/calibration'
+    | '/judge/teams'
     | '/login/admin'
     | '/login/competitor'
     | '/login/judge'
     | '/competitor/'
+    | '/judge/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -138,28 +177,36 @@ export interface FileRouteTypes {
     | '/competitor/documents'
     | '/competitor/profile'
     | '/competitor/updates'
+    | '/judge/calibration'
+    | '/judge/teams'
     | '/login/admin'
     | '/login/competitor'
     | '/login/judge'
     | '/competitor'
+    | '/judge'
   id:
     | '__root__'
     | '/'
     | '/competitor'
+    | '/judge'
     | '/register'
     | '/competitor/application'
     | '/competitor/documents'
     | '/competitor/profile'
     | '/competitor/updates'
+    | '/judge/calibration'
+    | '/judge/teams'
     | '/login/admin'
     | '/login/competitor'
     | '/login/judge'
     | '/competitor/'
+    | '/judge/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CompetitorRoute: typeof CompetitorRouteWithChildren
+  JudgeRoute: typeof JudgeRouteWithChildren
   RegisterRoute: typeof RegisterRoute
   LoginAdminRoute: typeof LoginAdminRoute
   LoginCompetitorRoute: typeof LoginCompetitorRoute
@@ -180,6 +227,13 @@ declare module '@tanstack/react-router' {
       path: '/competitor'
       fullPath: '/competitor'
       preLoaderRoute: typeof CompetitorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/judge': {
+      id: '/judge'
+      path: '/judge'
+      fullPath: '/judge'
+      preLoaderRoute: typeof JudgeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/register': {
@@ -223,6 +277,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/competitor/updates'
       preLoaderRoute: typeof CompetitorUpdatesRouteImport
       parentRoute: typeof CompetitorRoute
+    }
+    '/judge/': {
+      id: '/judge/'
+      path: '/'
+      fullPath: '/judge/'
+      preLoaderRoute: typeof JudgeIndexRouteImport
+      parentRoute: typeof JudgeRoute
+    }
+    '/judge/calibration': {
+      id: '/judge/calibration'
+      path: '/calibration'
+      fullPath: '/judge/calibration'
+      preLoaderRoute: typeof JudgeCalibrationRouteImport
+      parentRoute: typeof JudgeRoute
+    }
+    '/judge/teams': {
+      id: '/judge/teams'
+      path: '/teams'
+      fullPath: '/judge/teams'
+      preLoaderRoute: typeof JudgeTeamsRouteImport
+      parentRoute: typeof JudgeRoute
     }
     '/login/admin': {
       id: '/login/admin'
@@ -268,9 +343,24 @@ const CompetitorRouteWithChildren = CompetitorRoute._addFileChildren(
   CompetitorRouteChildren,
 )
 
+interface JudgeRouteChildren {
+  JudgeCalibrationRoute: typeof JudgeCalibrationRoute
+  JudgeTeamsRoute: typeof JudgeTeamsRoute
+  JudgeIndexRoute: typeof JudgeIndexRoute
+}
+
+const JudgeRouteChildren: JudgeRouteChildren = {
+  JudgeCalibrationRoute: JudgeCalibrationRoute,
+  JudgeTeamsRoute: JudgeTeamsRoute,
+  JudgeIndexRoute: JudgeIndexRoute,
+}
+
+const JudgeRouteWithChildren = JudgeRoute._addFileChildren(JudgeRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CompetitorRoute: CompetitorRouteWithChildren,
+  JudgeRoute: JudgeRouteWithChildren,
   RegisterRoute: RegisterRoute,
   LoginAdminRoute: LoginAdminRoute,
   LoginCompetitorRoute: LoginCompetitorRoute,
