@@ -1,9 +1,17 @@
 # Galaxy Judge — roadmap
 
-- [x] Replace emoji with Lucide icons across nav and pages
-- [x] Premium Samsung One UI design tokens (#1428A0 accent, charcoal, cool greys, Inter)
-- [x] Landing: three-portal experience, demo credentials moved to Demo & test access
-- [x] Login screens: charcoal context panel, demo access disclosure
-- [x] Dashboard headers: charcoal band replacing blue gradient hero
-- [x] Cards, tables, forms, badges, buttons, nav consistency
-- [x] Responsive check (mobile/tablet/desktop)
+## Done
+- Three separate portals (Competitor, Judge, Administrator) with real role-based access.
+- Weighted rubric scoring, submit-and-lock, correction requests, audit trail.
+- Offline-first judging: auto-save, Online / Offline / Pending sync / Synced status, automatic
+  synchronisation on reconnect, one authoritative record per judge+team (no duplicate scores).
+- Evidence / School Locker: documents, presentation, images, video and supporting evidence with
+  in-page preview plus open and download fallbacks (judge and admin).
+- Live stage status: admin control of the presenting school with timer, reflected in the Judge portal.
+- Post-judging analytics: score distribution, criterion performance, judging completion,
+  judge scoring patterns, school performance versus the competition average.
+- Results podium in presentation mode, built from locked evaluations only.
+- Administrator-only Test accounts page; registration creates working competitor accounts.
+
+## Open
+- None.
