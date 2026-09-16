@@ -14,6 +14,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { toast } from "sonner";
 import { seedData } from "./data";
 import type {
   Account,
@@ -28,8 +29,18 @@ import type {
 } from "./types";
 import { weightedScore } from "./scoring";
 
-const KEY = "galaxy-judge-state-v2";
-const SESSION_KEY = "galaxy-judge-session-v2";
+const KEY = "galaxy-judge-state-v3";
+const SESSION_KEY = "galaxy-judge-session-v3";
+const ONLINE_KEY = "galaxy-judge-connectivity-v3";
+
+export interface SaveEvaluationInput {
+  judgeId: string;
+  teamId: string;
+  scores: Record<string, number>;
+  notes: Record<string, string>;
+  status: "draft" | "locked";
+  actor: string;
+}
 
 interface Ctx {
   data: GJData;
@@ -37,6 +48,16 @@ interface Ctx {
   session: Account | null;
   online: boolean;
   setOnline: (v: boolean) => void;
+  /** evaluations saved on this device that have not reached the server yet */
+  pending: number;
+  syncing: boolean;
+  lastSyncedAt: string | null;
+  syncNow: () => void;
+  saveEvaluation: (input: SaveEvaluationInput) => { ok: boolean; error?: string; queued: boolean };
+  setStage: (
+    patch: Partial<GJData["competition"]["stage"]>,
+    audit?: { actor: string; action: string; target?: string },
+  ) => void;
   login: (role: Role, email: string, password: string) => { ok: boolean; error?: string };
   logout: () => void;
   register: (input: {
@@ -63,7 +84,9 @@ export function GJProvider({ children }: { children: ReactNode }) {
   const [data, setData] = useState<GJData>(() => seedData());
   const [session, setSession] = useState<Account | null>(null);
   const [hydrated, setHydrated] = useState(false);
-  const [online, setOnline] = useState(true);
+  const [online, setOnlineState] = useState(true);
+  const [syncing, setSyncing] = useState(false);
+  const [lastSyncedAt, setLastSyncedAt] = useState<string | null>(null);
 
   useEffect(() => {
     try {
@@ -71,10 +94,21 @@ export function GJProvider({ children }: { children: ReactNode }) {
       if (raw) setData(JSON.parse(raw) as GJData);
       const s = localStorage.getItem(SESSION_KEY);
       if (s) setSession(JSON.parse(s) as Account);
+      // connectivity is remembered so an offline demo survives a page reload
+      if (localStorage.getItem(ONLINE_KEY) === "offline") setOnlineState(false);
     } catch {
       /* ignore corrupt storage */
     }
     setHydrated(true);
+  }, []);
+
+  const setOnline = useCallback((v: boolean) => {
+    setOnlineState(v);
+    try {
+      localStorage.setItem(ONLINE_KEY, v ? "online" : "offline");
+    } catch {
+      /* ignore */
+    }
   }, []);
 
   useEffect(() => {
@@ -116,6 +150,103 @@ export function GJProvider({ children }: { children: ReactNode }) {
       });
     },
     [session, update],
+  );
+
+  /* ---------- offline-first evaluation queue ---------- */
+
+  const pending = data.evaluations.filter((e) => e.synced === false).length;
+
+  const saveEvaluation = useCallback<Ctx["saveEvaluation"]>(
+    ({ judgeId, teamId, scores, notes, status, actor }) => {
+      const current = data.evaluations.find((e) => e.judgeId === judgeId && e.teamId === teamId);
+      // a locked evaluation can never be overwritten — corrections go through the admin workflow
+      if (current?.status === "locked") {
+        return { ok: false, error: "This evaluation is locked and cannot be changed.", queued: false };
+      }
+      const stamp = now();
+      const queued = !online;
+      update(
+        (d) => {
+          const idx = d.evaluations.findIndex((e) => e.judgeId === judgeId && e.teamId === teamId);
+          const prev = idx >= 0 ? d.evaluations[idx]! : undefined;
+          const record = {
+            id: `${judgeId}:${teamId}`,
+            judgeId,
+            teamId,
+            scores,
+            notes,
+            status,
+            updatedAt: stamp,
+            synced: !queued,
+            revision: (prev?.revision ?? 0) + 1,
+            ...(status === "locked"
+              ? { submittedAt: stamp, total: weightedScore(scores, d.rubric) }
+              : {}),
+          };
+          // upsert on judge+team keeps one authoritative record — no duplicate scores
+          if (idx >= 0) d.evaluations[idx] = { ...prev!, ...record };
+          else d.evaluations.push(record);
+        },
+        {
+          actor,
+          role: "judge",
+          action:
+            status === "locked"
+              ? queued
+                ? "Evaluation locked offline (queued for sync)"
+                : "Evaluation submitted and locked"
+              : queued
+                ? "Evaluation saved offline (queued for sync)"
+                : "Evaluation saved",
+          target: teamId,
+        },
+      );
+      if (!queued) setLastSyncedAt(new Date().toTimeString().slice(0, 8));
+      return { ok: true, queued };
+    },
+    [data.evaluations, online, update],
+  );
+
+  const syncNow = useCallback(() => {
+    if (!online) return;
+    const queue = data.evaluations.filter((e) => e.synced === false);
+    if (!queue.length || syncing) return;
+    setSyncing(true);
+    window.setTimeout(() => {
+      update(
+        (d) => {
+          for (const e of d.evaluations) if (e.synced === false) e.synced = true;
+        },
+        {
+          actor: session?.name ?? "Judge",
+          role: session?.role ?? "system",
+          action: `${queue.length} offline evaluation${queue.length > 1 ? "s" : ""} synchronised`,
+          target: queue.map((e) => e.teamId).join(", "),
+        },
+      );
+      setSyncing(false);
+      setLastSyncedAt(new Date().toTimeString().slice(0, 8));
+      toast.success(
+        `${queue.length} offline evaluation${queue.length > 1 ? "s" : ""} synchronised successfully.`,
+      );
+    }, 1400);
+  }, [online, data.evaluations, syncing, update, session]);
+
+  // synchronise automatically the moment connectivity returns
+  useEffect(() => {
+    if (online && pending > 0 && !syncing) syncNow();
+  }, [online, pending, syncing, syncNow]);
+
+  const setStage = useCallback<Ctx["setStage"]>(
+    (patch, audit) => {
+      update(
+        (d) => {
+          d.competition.stage = { ...d.competition.stage, ...patch };
+        },
+        audit ? { actor: audit.actor, role: "admin", action: audit.action, ...(audit.target ? { target: audit.target } : {}) } : undefined,
+      );
+    },
+    [update],
   );
 
   const login = useCallback<Ctx["login"]>(
@@ -194,8 +325,14 @@ export function GJProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo<Ctx>(
-    () => ({ data, hydrated, session, online, setOnline, login, logout, register, update, log, reset }),
-    [data, hydrated, session, online, login, logout, register, update, log, reset],
+    () => ({
+      data, hydrated, session, online, setOnline, pending, syncing, lastSyncedAt, syncNow,
+      saveEvaluation, setStage, login, logout, register, update, log, reset,
+    }),
+    [
+      data, hydrated, session, online, setOnline, pending, syncing, lastSyncedAt, syncNow,
+      saveEvaluation, setStage, login, logout, register, update, log, reset,
+    ],
   );
 
   return <GJContext.Provider value={value}>{children}</GJContext.Provider>;

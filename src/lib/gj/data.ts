@@ -30,7 +30,7 @@ function rng(seed: number) {
 }
 
 /* ---------- seeded account credentials (private; never rendered in the UI) ---------- */
-const SEED_ACCOUNTS = {
+export const SEED_ACCOUNTS = {
   competitor: { email: "alpha.team@galaxyjudge.app", password: "Gj-Comp-4712" },
   competitor2: { email: "ecogrid.team@galaxyjudge.app", password: "Gj-Comp-6033" },
   judge: { email: "j.mokoena@galaxyjudge.app", password: "Gj-Judge-8135" },
@@ -249,6 +249,8 @@ export function seedData(): GJData {
         status: state,
         updatedAt: "2026-03-14 14:16",
         submittedAt: state === "locked" ? "2026-03-14 14:23" : undefined,
+        synced: true,
+        revision: 1,
       };
       evaluations.push(ev);
     }
@@ -304,6 +306,13 @@ export function seedData(): GJData {
       phase: 4,
       judgingClosed: false,
       resultsReleased: false,
+      stage: {
+        teamId: "SFT-05",
+        status: "idle",
+        startedAt: null,
+        elapsedMs: 0,
+        allottedMinutes: 8,
+      },
     },
   };
 }

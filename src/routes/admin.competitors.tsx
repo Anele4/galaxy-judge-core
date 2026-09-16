@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
+import { EvidenceLocker } from "@/components/gj/EvidenceLocker";
 import { Badge, Button, Card, Field, SectionTitle } from "@/components/gj/ui";
+import { docPreview, downloadFile, openFile } from "@/lib/gj/files";
 import { useGJ } from "@/lib/gj/store";
 import type { Team, TeamStatus } from "@/lib/gj/types";
 
@@ -19,6 +21,8 @@ function CompetitorAdmin() {
   const [adding, setAdding] = useState(false);
   const [draft, setDraft] = useState({ teamName: "", name: "", school: "", category: "Education" });
   const [open, setOpen] = useState<string | null>(null);
+  const [locker, setLocker] = useState<string | null>(null);
+  const lockerTeam = data.teams.find((t) => t.id === locker) ?? null;
 
   const actor = session?.name ?? "Administrator";
 
@@ -65,6 +69,7 @@ function CompetitorAdmin() {
 
   return (
     <div className="space-y-6">
+      {lockerTeam ? <EvidenceLocker team={lockerTeam} onClose={() => setLocker(null)} /> : null}
       <SectionTitle
         title="Competitor management"
         subtitle={`${data.teams.length} teams registered. The platform scales beyond this cohort.`}
@@ -134,10 +139,39 @@ function CompetitorAdmin() {
                     </div>
                   ))}
                 </div>
-                <p className="mt-4 text-sm font-semibold">Documents</p>
-                <ul className="mt-1 text-sm text-muted-foreground">
-                  {t.documents.map((d) => <li key={d.id}>• {d.name} ({d.kind}) — {d.uploadedAt}</li>)}
-                  {t.documents.length === 0 ? <li>No documents submitted.</li> : null}
+                <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <p className="text-sm font-semibold">Submitted documents &amp; evidence</p>
+                    <p className="text-xs text-muted-foreground">
+                      {t.documents.length} documents · {t.evidence.length} evidence items
+                    </p>
+                  </div>
+                  <Button variant="outline" onClick={() => setLocker(t.id)}>
+                    Open evidence locker
+                  </Button>
+                </div>
+                <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+                  {t.documents.map((d) => (
+                    <li key={d.id} className="gj-panel flex items-center justify-between gap-3 p-3 text-sm">
+                      <span className="min-w-0">
+                        <span className="block truncate font-semibold">{d.name}</span>
+                        <span className="block truncate text-xs text-muted-foreground">
+                          {d.kind} · {d.type} · {d.size} · {d.uploadedAt}
+                        </span>
+                      </span>
+                      <span className="flex shrink-0 gap-3">
+                        <button className="text-xs font-semibold text-primary" onClick={() => openFile(docPreview(t, d))}>
+                          Open
+                        </button>
+                        <button className="text-xs font-semibold text-primary" onClick={() => downloadFile(docPreview(t, d))}>
+                          Download
+                        </button>
+                      </span>
+                    </li>
+                  ))}
+                  {t.documents.length === 0 ? (
+                    <li className="text-sm text-muted-foreground">No documents submitted.</li>
+                  ) : null}
                 </ul>
               </>
             );

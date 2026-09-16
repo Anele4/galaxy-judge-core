@@ -113,6 +113,10 @@ export interface Evaluation {
   updatedAt: string;
   submittedAt?: string | undefined;
   total?: number | undefined; // weighted 0-100
+  /** false while the change exists only on this device (offline-first queue). */
+  synced?: boolean | undefined;
+  /** local revision counter — prevents duplicate / conflicting writes on sync. */
+  revision?: number | undefined;
 }
 
 export interface CorrectionRequest {
@@ -145,11 +149,24 @@ export interface AuditEvent {
   target?: string | undefined;
 }
 
+/** Live presentation stage, controlled by the administrator. */
+export interface StageState {
+  teamId: string | null;
+  status: "idle" | "presenting" | "paused" | "complete";
+  /** epoch ms when the current presentation started/resumed */
+  startedAt: number | null;
+  /** accumulated milliseconds from previous (paused) segments */
+  elapsedMs: number;
+  /** allotted presentation length in minutes */
+  allottedMinutes: number;
+}
+
 export interface CompetitionState {
   name: string;
   phase: 1 | 2 | 3 | 4;
   judgingClosed: boolean;
   resultsReleased: boolean;
+  stage: StageState;
 }
 
 export interface GJData {
