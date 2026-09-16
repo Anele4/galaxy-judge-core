@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Check } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Badge, Button, Card, Notice, Progress, SectionTitle } from "@/components/gj/ui";
@@ -25,9 +26,18 @@ function Results() {
         </Notice>
         <Card className="p-6">
           <ul className="space-y-2 text-sm">
-            <li>{pending === 0 ? "✓" : "⚠"} Correction requests resolved ({pending} outstanding)</li>
-            <li>✓ Synchronisation checked — 0 sync conflicts</li>
-            <li>✓ Score integrity verified against locked records</li>
+            <li className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-[color:var(--color-success)]" aria-hidden />
+              Correction requests resolved ({pending} outstanding)
+            </li>
+            <li className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-[color:var(--color-success)]" aria-hidden />
+              Synchronisation checked — {data.evaluations.filter((e) => e.synced === false).length} unsynchronised records
+            </li>
+            <li className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-[color:var(--color-success)]" aria-hidden />
+              Score integrity verified against locked records
+            </li>
           </ul>
         </Card>
       </div>
@@ -62,11 +72,14 @@ function Results() {
         title="Final results"
         subtitle="Rankings are calculated live from locked evaluations and the configured weighted rubric."
         action={
-          data.competition.resultsReleased ? (
-            <Badge tone="success">Results released</Badge>
-          ) : (
-            <Button onClick={announceWinner}>Release final results</Button>
-          )
+          <div className="flex flex-wrap gap-2">
+            <Link to="/admin/podium" className="gj-btn gj-btn-outline">Presentation podium</Link>
+            {data.competition.resultsReleased ? (
+              <Badge tone="success">Results released</Badge>
+            ) : (
+              <Button onClick={announceWinner}>Release final results</Button>
+            )}
+          </div>
         }
       />
 
@@ -118,11 +131,18 @@ function Results() {
               <div className="mt-6 rounded-2xl bg-secondary p-4 text-sm">
                 <p className="font-semibold">Evaluation integrity</p>
                 <ul className="mt-2 space-y-1 text-muted-foreground">
-                  <li>✓ {chosen.evaluations} required evaluations completed and locked</li>
-                  <li>✓ Scores consolidated using the configured weighted rubric</li>
-                  <li>✓ No unauthorised changes detected</li>
-                  <li>✓ Audit trail available for every scoring event</li>
-                  <li>✓ Correction workflow completed</li>
+                  {[
+                    `${chosen.evaluations} required evaluations completed and locked`,
+                    "Scores consolidated using the configured weighted rubric",
+                    "No unauthorised changes detected",
+                    "Audit trail available for every scoring event",
+                    "Correction workflow completed",
+                  ].map((line) => (
+                    <li key={line} className="flex items-start gap-2">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--color-success)]" aria-hidden />
+                      {line}
+                    </li>
+                  ))}
                 </ul>
               </div>
 

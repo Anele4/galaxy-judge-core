@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { StageStatus } from "@/components/gj/StageStatus";
 import { Badge, Card, Notice, Progress, SectionTitle, Stat } from "@/components/gj/ui";
 import { evaluationFor, useGJ, useJudge } from "@/lib/gj/store";
 
@@ -32,6 +33,8 @@ function JudgeHome() {
           Independent evaluation active
         </div>
       </Card>
+
+      <StageStatus />
 
       {!judge.calibrated ? (
         <Notice tone="warning" title="Calibration outstanding">

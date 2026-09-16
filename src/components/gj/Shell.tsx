@@ -8,6 +8,7 @@ import { Lock as LockIcon, type LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
 import { useGJ } from "@/lib/gj/store";
 import type { Role } from "@/lib/gj/types";
+import { SyncStatus } from "./SyncStatus";
 import { Button, Card } from "./ui";
 
 export interface NavItem {
@@ -31,7 +32,7 @@ export function Shell({
   nav: NavItem[];
   children: ReactNode;
 }) {
-  const { session, logout, hydrated, online, setOnline } = useGJ();
+  const { session, logout, hydrated } = useGJ();
   const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
@@ -79,19 +80,7 @@ export function Shell({
           </Link>
           <span className="gj-badge gj-badge-info capitalize">{role}</span>
           <div className="ml-auto flex items-center gap-2">
-            {role === "judge" ? (
-              <button
-                onClick={() => setOnline(!online)}
-                className="gj-badge gj-badge-neutral"
-                title="Simulate connectivity for offline judging"
-              >
-                <span
-                  aria-hidden
-                  className={`mr-1.5 inline-block h-2 w-2 rounded-full ${online ? "bg-emerald-500" : "bg-red-500"}`}
-                />
-                {online ? "Online" : "Offline"}
-              </button>
-            ) : null}
+            {role === "judge" ? <SyncStatus /> : null}
             <span className="hidden text-sm font-semibold sm:block">{session.name}</span>
             <Button
               variant="outline"
